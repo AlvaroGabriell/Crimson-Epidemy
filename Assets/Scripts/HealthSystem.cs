@@ -4,6 +4,7 @@ public class HealthSystem : MonoBehaviour
 {
     private float health; //Actual Health
     public float maxHealth = 20.0f; //Max and Base Health, can be changed with setMaxHealth (will update actual health)
+    public bool canDie = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,19 +29,27 @@ public class HealthSystem : MonoBehaviour
         health = pHealth;
     }
 
-    public void DealDamage(float pDamage)
+    public void TakeDamage(float pDamage)
     {
-        health = Mathf.Min(health - pDamage, 0);
+        health = Mathf.Max(health - pDamage, 0);
+
+        if (ShouldDie() && canDie == true) Destroy(gameObject);
     }
 
     public void HealHealth(float pHealing)
     {
-        health = Mathf.Max(health + pHealing, maxHealth);
+        health = Mathf.Min(health + pHealing, maxHealth);
     }
 
     public float GetHealth()
     {
         return health;
+    }
+
+    public bool ShouldDie()
+    {
+        if (health <= 0) return true;
+        return false;
     }
     
 }
