@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BulletBehavior : MonoBehaviour
+public class BulletBehaviour : MonoBehaviour
 {
     [SerializeField] private float bulletBaseSpeed = 10f, destroyTime = 3f;
     private Rigidbody2D rb;
