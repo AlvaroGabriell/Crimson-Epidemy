@@ -5,7 +5,7 @@ public class BulletBehaviour : MonoBehaviour
 {
     [SerializeField] private float bulletBaseSpeed = 10f, destroyTime = 3f;
     private Rigidbody2D rb;
-    public float bulletDamage = 5f;
+    public float bulletDamage = 5f, bulletSpeedModifier = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,6 +38,6 @@ public class BulletBehaviour : MonoBehaviour
 
     private void SetVelocity()
     {
-        rb.linearVelocity = transform.right * bulletBaseSpeed;
+        rb.linearVelocity = transform.right * bulletBaseSpeed * bulletSpeedModifier;
     }
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1beaf241b22fc394a8f0ca9bf76d9a60
+guid: c3455407637db9743a3a1dbb7abcd9fc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4115487291201005749
-    second: c0f10a19575841bd902ad65e8987f3e3~tplv-jj85edgx6n-image-origin_0
+      213: 3099445090247792210
+    second: cE_sprite_ArrowPlaceholder_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 3
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,27 +96,40 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: temp2
+      name: cE_sprite_ArrowPlaceholder_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 699
-        height: 943
+        width: 10
+        height: 5
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b8aba5f2e52d1930800000000000000
-      internalID: 4115487291201005749
+      spriteID: 2565c0553e0730b20800000000000000
+      internalID: 3099445090247792210
       vertices: []
       indices: 
       edges: []
@@ -125,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 920488c7000f63d44bb29e9f92a2e5a4
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      temp2: 4115487291201005749
+      cE_sprite_ArrowPlaceholder_0: 3099445090247792210
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

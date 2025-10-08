@@ -1,39 +1,34 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerRangedAttack : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject player, bullet;
     private GameObject bulletInstance;
 
     private Vector2 mouseWorldPosition, direction;
+    public float shootInterval = 2f;
+    public bool canShoot = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        StartCoroutine(Shoot());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator Shoot()
     {
-        GetMousePosition();
-        HandleShooting();
-    }
-
-    private void GetMousePosition()
-    {
-        mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        direction = (mouseWorldPosition - (Vector2)player.transform.position).normalized;
-        player.transform.right = direction;
-    }
-
-    private void HandleShooting()
-    {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        yield return new WaitForSeconds(shootInterval);
+        while (true)
         {
-            bulletInstance = Instantiate(bullet, player.transform.position, player.transform.rotation);
+            if (canShoot)
+            {
+                mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                direction = (mouseWorldPosition - (Vector2)player.transform.position).normalized;
+                bulletInstance = Instantiate(bullet, player.transform.position, Quaternion.FromToRotation(Vector3.right, direction));
+            }
+            yield return new WaitForSeconds(shootInterval);
         }
     }
 }

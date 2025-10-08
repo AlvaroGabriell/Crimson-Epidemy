@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
+    [Header("Health")]
     private float health; //Actual Health
     public float maxHealth = 20.0f; //Max and Base Health, can be changed with setMaxHealth (will update actual health)
     public bool canDie = true;
+
+    [Header("SFX")]
+    public string damageSFX;
+    public string deathSFX;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -12,15 +17,9 @@ public class HealthSystem : MonoBehaviour
         health = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void SetMaxHealth(float pMaxHealth)
     {
-        this.maxHealth = pMaxHealth;
+        maxHealth = pMaxHealth;
         health = maxHealth;
     }
 
@@ -33,7 +32,16 @@ public class HealthSystem : MonoBehaviour
     {
         health = Mathf.Max(health - pDamage, 0);
 
-        if (ShouldDie() && canDie == true) Destroy(gameObject);
+        if (!string.IsNullOrEmpty(damageSFX)) SFXManager.Play(damageSFX);
+
+        if (ShouldDie() && canDie == true) Die();
+    }
+
+    private void Die()
+    {
+        if (!string.IsNullOrEmpty(deathSFX)) SFXManager.Play(deathSFX);
+
+        Destroy(gameObject);
     }
 
     public void HealHealth(float pHealing)

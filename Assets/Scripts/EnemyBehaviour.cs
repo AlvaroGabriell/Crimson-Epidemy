@@ -29,15 +29,15 @@ public class EnemyBehaviour : MonoBehaviour
         rb.linearVelocity = direction * (baseMoveSpeed * moveSpeedModifier);
 
         //Rotaciona e flipa o sprite do inimigo
-        transform.right = direction;
+        //transform.right = direction;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle > 90 || angle < -90)
         {
-            spriteRenderer.flipY = true;
+            spriteRenderer.flipX = false;
         }
         else
         {
-            spriteRenderer.flipY = false;
+            spriteRenderer.flipX = true;
         }
     }
 

@@ -6,26 +6,36 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Animator animator;
     private HealthSystem health;
     private float horizontalMovement = 0f, verticalMovement = 0f;
     public float moveSpeedModifier = 1f, baseMoveSpeed = 3.0f;
+    private bool isMoving = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<HealthSystem>();
+        animator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
     {
         HandleMovement();
+        UpdateValues();
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    void UpdateValues()
+    {
+        isMoving = Mathf.Abs(horizontalMovement) > 0f || Mathf.Abs(verticalMovement) > 0f;
+        animator.SetBool("isMoving", isMoving);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -45,6 +55,9 @@ public class PlayerController : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(horizontalMovement * baseMoveSpeed * moveSpeedModifier,
                                         verticalMovement * baseMoveSpeed * moveSpeedModifier);
+
+        if (horizontalMovement > 0f) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        else if (horizontalMovement < 0f) transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
 
     //Captura o input de movimento
@@ -52,5 +65,10 @@ public class PlayerController : MonoBehaviour
     {
         horizontalMovement = context.ReadValue<Vector2>().x;
         verticalMovement = context.ReadValue<Vector2>().y;
+    }
+
+    public void PlaySFX(string sfxName)
+    {
+        SFXManager.Play(sfxName);
     }
 }
