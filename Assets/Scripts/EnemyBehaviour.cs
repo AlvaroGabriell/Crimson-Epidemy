@@ -1,19 +1,27 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(AttributesSystem))]
+[RequireComponent(typeof(HealthSystem))]
 public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private AttributesSystem attributes;
+    private HealthSystem health;
     [SerializeField] private int level = 1;
-    [SerializeField] private float damage = 5f, baseMoveSpeed = 2.0f, moveSpeedModifier = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        attributes = GetComponent<AttributesSystem>();
+        health = GetComponent<HealthSystem>();
+        health.attributes = attributes;
+
         if (player == null) player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -26,7 +34,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         // Move o inimigo
         Vector2 direction = (player.transform.position - transform.position).normalized;
-        rb.linearVelocity = direction * (baseMoveSpeed * moveSpeedModifier);
+        rb.linearVelocity = direction * attributes.moveSpeed.FinalValue;
 
         //Rotaciona e flipa o sprite do inimigo
         //transform.right = direction;
@@ -41,6 +49,11 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    public float GetEnemyDamage()
+    {
+        return attributes.attackDamage.FinalValue;
+    }
+
     public void SetEnemyLevel(int level)
     {
         this.level = level;
@@ -48,13 +61,5 @@ public class EnemyBehaviour : MonoBehaviour
     public int GetEnemyLevel()
     {
         return level;
-    }
-    public void SetEnemyDamage(float damage)
-    {
-        this.damage = damage;
-    }
-    public float GetEnemyDamage()
-    {
-        return damage;
     }
 }

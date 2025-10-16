@@ -165,7 +165,8 @@ public class DevTools : MonoBehaviour
             {
                 Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                 Vector2 direction = (mouseWorldPosition - (Vector2)player.transform.position).normalized;
-                Instantiate(bulletPrefab, player.transform.position, Quaternion.FromToRotation(Vector3.right, direction));
+                GameObject bulletInstance = Instantiate(bulletPrefab, player.transform.position, Quaternion.FromToRotation(Vector3.right, direction));
+                bulletInstance.GetComponent<BulletBehaviour>().playerAttributes = player.GetComponent<AttributesSystem>();
             }
         }
     }

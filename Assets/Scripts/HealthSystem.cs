@@ -1,11 +1,14 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
     [Header("Health")]
-    private float health; //Actual Health
-    public float maxHealth = 20.0f; //Max and Base Health, can be changed with setMaxHealth (will update actual health)
-    public bool canDie = true;
+    private float health; 
+    [SerializeField] private float maxHealth = 20f;
+    public bool canDie = true, canRegen = false, regenActive = false, canTakeDamage = true, isAlive = true;
+    public AttributesSystem attributes;
 
     [Header("SFX")]
     public string damageSFX;
@@ -14,10 +17,15 @@ public class HealthSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        health = maxHealth;
+        if (gameObject.GetComponent<AttributesSystem>() != null) SetMaxHealthAndFullHeal(gameObject.GetComponent<AttributesSystem>().maxHealth.FinalValue);
+        else health = maxHealth;
     }
 
     public void SetMaxHealth(float pMaxHealth)
+    {
+        maxHealth = pMaxHealth;
+    }
+    public void SetMaxHealthAndFullHeal(float pMaxHealth)
     {
         maxHealth = pMaxHealth;
         health = maxHealth;
@@ -30,6 +38,8 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeDamage(float pDamage)
     {
+        if (!canTakeDamage || !isAlive) return;
+
         health = Mathf.Max(health - pDamage, 0);
 
         if (!string.IsNullOrEmpty(damageSFX)) SFXManager.Play(damageSFX);
@@ -56,8 +66,28 @@ public class HealthSystem : MonoBehaviour
 
     public bool ShouldDie()
     {
-        if (health <= 0) return true;
-        return false;
+        return health <= 0;
+    }
+
+    public void StartOrStopRegen()
+    {
+        if (regenActive) StartCoroutine(Regen());
+        else StopCoroutine(Regen());
     }
     
+    // Player-only method. Should not be called in non-player object, although it is possible.
+    private IEnumerator Regen()
+    {
+        while (true)
+        {
+            if (isAlive && canRegen)
+            {
+                HealHealth(attributes.healthRegen.FinalValue);
+            }
+
+            float regenInterval = 5f / attributes.regenSpeed.FinalValue;
+
+            yield return new WaitForSeconds(regenInterval);
+        }
+    }
 }

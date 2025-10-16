@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 5691762576892013627}
   - component: {fileID: 7054493280561750136}
   - component: {fileID: 938565851580064324}
-  - component: {fileID: 21475870245764321}
   - component: {fileID: 1125940868846803251}
+  - component: {fileID: 5008392816168876368}
+  - component: {fileID: 8315390142774352718}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -167,22 +168,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.326313, y: 2.0572753}
   m_EdgeRadius: 0
---- !u!114 &21475870245764321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2679342084018653814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d984ee93e3844bd48a8f4581cb13f489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 20
-  canDie: 1
-  damageSFX: 
-  deathSFX: ZombieDies
 --- !u!114 &1125940868846803251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +182,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   level: 1
-  damage: 5
-  baseMoveSpeed: 2
-  moveSpeedModifier: 1
+--- !u!114 &5008392816168876368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2679342084018653814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d984ee93e3844bd48a8f4581cb13f489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+  maxHealth: 0
+  canDie: 1
+  canRegen: 0
+  regenActive: 0
+  canTakeDamage: 1
+  isAlive: 1
+  attributes: {fileID: 8315390142774352718}
+  damageSFX: 
+  deathSFX: ZombieDies
+--- !u!114 &8315390142774352718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2679342084018653814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5203e1ce46db1848837d97033399684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttributesSystem
+  maxHealth:
+    baseValue: 20
+    modifier: 1
+  healthRegen:
+    baseValue: 0
+    modifier: 1
+  regenSpeed:
+    baseValue: 1
+    modifier: 1
+  moveSpeed:
+    baseValue: 2
+    modifier: 1
+  attackDamage:
+    baseValue: 5
+    modifier: 1
+  attackSpeed:
+    baseValue: 1
+    modifier: 1
+  projectileSpeed:
+    baseValue: 1
+    modifier: 1
+  criticalChance:
+    baseValue: 1
+    modifier: 1
+  criticalMultiplier:
+    baseValue: 1
+    modifier: 1

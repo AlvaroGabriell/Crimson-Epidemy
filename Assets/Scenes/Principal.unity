@@ -36840,10 +36840,11 @@ GameObject:
   - component: {fileID: 848951818}
   - component: {fileID: 848951825}
   - component: {fileID: 848951816}
+  - component: {fileID: 848951826}
   - component: {fileID: 848951817}
   - component: {fileID: 848951823}
   - component: {fileID: 848951822}
-  - component: {fileID: 848951826}
+  - component: {fileID: 848951827}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -37093,8 +37094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273f568821914d1428c70150e7176880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedModifier: 1
-  baseMoveSpeed: 3
+  attributes: {fileID: 0}
 --- !u!50 &848951818
 Rigidbody2D:
   serializedVersion: 5
@@ -37253,8 +37253,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d984ee93e3844bd48a8f4581cb13f489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 0
   canDie: 1
+  canRegen: 0
+  regenActive: 0
+  canTakeDamage: 1
+  isAlive: 1
+  attributes: {fileID: 0}
   damageSFX: PlayerDamage
   deathSFX: PlayerDies
 --- !u!114 &848951823
@@ -37269,7 +37274,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df18cf497d530840bc30196f82700fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 848951815}
   bullet: {fileID: 2527920891034264696, guid: 645a3dd44d7550043a3f2c5c2d63f124, type: 3}
   shootInterval: 2
   canShoot: 1
@@ -37410,6 +37414,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &848951827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848951815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5203e1ce46db1848837d97033399684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttributesSystem
+  maxHealth:
+    baseValue: 1
+    modifier: 1
+  healthRegen:
+    baseValue: 1
+    modifier: 1
+  regenSpeed:
+    baseValue: 1
+    modifier: 1
+  moveSpeed:
+    baseValue: 1
+    modifier: 1
+  attackDamage:
+    baseValue: 1
+    modifier: 1
+  attackSpeed:
+    baseValue: 1
+    modifier: 1
+  projectileSpeed:
+    baseValue: 1
+    modifier: 1
+  criticalChance:
+    baseValue: 1
+    modifier: 1
+  criticalMultiplier:
+    baseValue: 1
+    modifier: 1
 --- !u!1 &1007091513
 GameObject:
   m_ObjectHideFlags: 0

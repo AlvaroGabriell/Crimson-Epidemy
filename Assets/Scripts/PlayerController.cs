@@ -3,13 +3,16 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(HealthSystem))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AttributesSystem))]
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator animator;
     private HealthSystem health;
+    [HideInInspector]
+    public AttributesSystem attributes;
     private float horizontalMovement = 0f, verticalMovement = 0f;
-    public float moveSpeedModifier = 1f, baseMoveSpeed = 3.0f;
     private bool isMoving = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,6 +21,21 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<HealthSystem>();
         animator = GetComponent<Animator>();
+        attributes = GetComponent<AttributesSystem>();
+
+        // Setting attributes
+        attributes.maxHealth.SetBaseValue(20f);
+        attributes.healthRegen.SetBaseValue(0f);
+        attributes.regenSpeed.SetBaseValue(2f);
+        attributes.moveSpeed.SetBaseValue(3f);
+        attributes.attackDamage.SetBaseValue(5f);
+        attributes.attackSpeed.SetBaseValue(1f);
+        attributes.projectileSpeed.SetBaseValue(8f);
+        attributes.criticalChance.SetPercentValue(10f);
+        attributes.criticalMultiplier.SetBaseValue(2f);
+
+        health.attributes = attributes;
+        health.SetMaxHealthAndFullHeal(attributes.maxHealth.FinalValue);
     }
 
     void FixedUpdate()
@@ -26,16 +44,14 @@ public class PlayerController : MonoBehaviour
         UpdateValues();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void UpdateValues()
     {
+        // ---------- Animator ----------
         isMoving = Mathf.Abs(horizontalMovement) > 0f || Mathf.Abs(verticalMovement) > 0f;
         animator.SetBool("isMoving", isMoving);
+
+        // ---------- Health ----------
+        health.SetMaxHealth(attributes.maxHealth.FinalValue);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -53,8 +69,7 @@ public class PlayerController : MonoBehaviour
     //Calcula e executa o movimento do jogador.
     public void HandleMovement()
     {
-        rb.linearVelocity = new Vector2(horizontalMovement * baseMoveSpeed * moveSpeedModifier,
-                                        verticalMovement * baseMoveSpeed * moveSpeedModifier);
+        rb.linearVelocity = new Vector2(horizontalMovement * attributes.moveSpeed.FinalValue, verticalMovement * attributes.moveSpeed.FinalValue);
 
         if (horizontalMovement > 0f) transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         else if (horizontalMovement < 0f) transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);

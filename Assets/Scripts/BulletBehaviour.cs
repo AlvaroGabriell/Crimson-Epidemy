@@ -1,11 +1,14 @@
 using System;
+using System.Data.Common;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class BulletBehaviour : MonoBehaviour
 {
-    [SerializeField] private float bulletBaseSpeed = 10f, destroyTime = 3f;
+    [SerializeField] private float destroyTime = 3f;
     private Rigidbody2D rb;
-    public float bulletDamage = 5f, bulletSpeedModifier = 1f;
+    public AttributesSystem playerAttributes;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,19 +21,14 @@ public class BulletBehaviour : MonoBehaviour
         Destroy(gameObject, destroyTime);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
             if (collision.gameObject.GetComponent<HealthSystem>() != null)
             {
-                collision.gameObject.GetComponent<HealthSystem>().TakeDamage(bulletDamage);
+                float damage = (Random.value < playerAttributes.criticalChance.FinalValue || playerAttributes.criticalChance.FinalValue >= 1f) ? playerAttributes.attackDamage.FinalValue * playerAttributes.criticalMultiplier.FinalValue : playerAttributes.attackDamage.FinalValue;
+                collision.gameObject.GetComponent<HealthSystem>().TakeDamage(damage);
             }
             Destroy(gameObject);
         }
@@ -38,6 +36,6 @@ public class BulletBehaviour : MonoBehaviour
 
     private void SetVelocity()
     {
-        rb.linearVelocity = transform.right * bulletBaseSpeed * bulletSpeedModifier;
+        rb.linearVelocity = playerAttributes.projectileSpeed.FinalValue * transform.right;
     }
 }
