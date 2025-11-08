@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
     
     public void QuitGame(){
         //Fechar a aplicação;
-        //Debug.Log("Game is now closed"); -- Debug apenas para questões de testes
+        Debug.Log("Game is now closed"); // Debug apenas para questões de testes
         Application.Quit();
     }
 }

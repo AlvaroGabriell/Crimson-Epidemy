@@ -1,16 +1,24 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class OptionsMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public AudioMixer audioMixer;
+
+    public void SetMasterVolume(float volume)
     {
-        
+        Debug.Log(volume);
+        audioMixer.SetFloat("masterVolume", volume);
+    }
+    public void SetVolumeBGM(float volume)
+    {
+        Debug.Log(volume);
+        audioMixer.SetFloat("volumeBGM", volume);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetVolumeSFX (float volume)
     {
-        
+        Debug.Log(volume);
+        audioMixer.SetFloat("volumeSFX",volume);
     }
 }
