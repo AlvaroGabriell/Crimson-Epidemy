@@ -10,7 +10,8 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Alte Haas Grotesk
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d3e9081d983482f4db48a1579cd2c6bf, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

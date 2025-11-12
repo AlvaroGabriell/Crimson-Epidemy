@@ -10,7 +10,8 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Opera-Lyrics-Smooth
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 65ee11d48a40ece499511e2cc35549dc, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
