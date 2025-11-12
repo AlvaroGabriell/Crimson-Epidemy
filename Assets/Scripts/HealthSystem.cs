@@ -50,6 +50,7 @@ public class HealthSystem : MonoBehaviour
     private void Die()
     {
         if (!string.IsNullOrEmpty(deathSFX)) SFXManager.Play(deathSFX);
+        if (gameObject.CompareTag("Enemy")) gameObject.GetComponent<EnemyBehaviour>().DropLoot();
 
         Destroy(gameObject);
     }
@@ -57,6 +58,10 @@ public class HealthSystem : MonoBehaviour
     public void HealHealth(float pHealing)
     {
         health = Mathf.Min(health + pHealing, maxHealth);
+    }
+    public void HealFullHealth()
+    {
+        health = maxHealth;
     }
 
     public float GetHealth()

@@ -12,9 +12,10 @@ public class EnemyBehaviour : MonoBehaviour
     private AttributesSystem attributes;
     private HealthSystem health;
     [SerializeField] private int level = 1;
+    [SerializeField] private GameObject xpPrefab, healthPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -41,11 +42,23 @@ public class EnemyBehaviour : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle > 90 || angle < -90)
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = true;
         }
         else
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = false;
+        }
+    }
+
+    public void DropLoot()
+    {
+        GameObject xpInstance = Instantiate(xpPrefab, gameObject.transform.position, Quaternion.identity);
+        xpInstance.GetComponent<CollectableBehaviour>().SetValue(5);
+
+        if(Random.Range(1, 4) == 1)
+        {
+            GameObject healthInstance = Instantiate(healthPrefab, gameObject.transform.position, Quaternion.identity);
+            healthInstance.GetComponent<CollectableBehaviour>().SetValue(10);
         }
     }
 

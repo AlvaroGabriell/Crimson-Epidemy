@@ -177,4 +177,25 @@ public class DevTools : MonoBehaviour
             SFXManager.Play("Pluh", audioSource);
         }
     }
+
+    public void LogPlayerAttributes(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            var attributes = player.GetComponent<PlayerController>().attributes.GetAttributeDictionary();
+            var health = player.GetComponent<HealthSystem>().GetHealth();
+            System.Text.StringBuilder sb = new();
+
+            sb.AppendLine("health: " + health);
+
+            foreach (var kvp in attributes)
+            {
+                var attrName = kvp.Key.ToString();
+                var attribute = kvp.Value;
+                sb.AppendLine($"{attrName}: {attribute.baseValue} * {attribute.modifier} = {attribute.FinalValue}");
+            }
+
+            Debug.Log(sb.ToString());
+        }
+    }
 }

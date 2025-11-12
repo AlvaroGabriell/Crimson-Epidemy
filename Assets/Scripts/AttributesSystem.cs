@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AttributesSystem : MonoBehaviour
@@ -11,22 +12,35 @@ public class AttributesSystem : MonoBehaviour
     public ScalableAttribute projectileSpeed;
     public ScalableAttribute criticalChance;
     public ScalableAttribute criticalMultiplier;
+    public ScalableAttribute pickupRange;
 
-    public void ApplyBaseUpgrade(ScalableAttribute attribute, float amount)
+    private Dictionary<Attribute, ScalableAttribute> attributes;
+
+    void Awake()
     {
-        attribute.baseValue += amount;
+        attributes = new Dictionary<Attribute, ScalableAttribute>
+        {
+            { Attribute.maxHealth, maxHealth },
+            { Attribute.healthRegen, healthRegen },
+            { Attribute.regenSpeed, regenSpeed },
+            { Attribute.moveSpeed, moveSpeed },
+            { Attribute.attackDamage, attackDamage },
+            { Attribute.attackSpeed, attackSpeed },
+            { Attribute.projectileSpeed, projectileSpeed },
+            { Attribute.criticalChance, criticalChance },
+            { Attribute.criticalMultiplier, criticalMultiplier },
+            { Attribute.pickupRange, pickupRange }
+        };
     }
-    public void SetBaseValue(ScalableAttribute attribute, float amount)
+
+    public ScalableAttribute GetAttributeByType(Attribute attr)
     {
-        attribute.baseValue = amount;
+        return attributes[attr];
     }
-    public void ApplyPercentUpgrade(ScalableAttribute attribute, float percent)
+
+    public Dictionary<Attribute, ScalableAttribute> GetAttributeDictionary()
     {
-        attribute.modifier += percent / 100f;
-    }
-    public void SetPercentValue(ScalableAttribute attribute, float percent)
-    {
-        attribute.modifier = percent / 100f;
+        return attributes;
     }
 }
 
@@ -48,10 +62,24 @@ public class ScalableAttribute
     }
     public void ApplyPercentUpgrade(float percent)
     {
-        modifier += percent / 100f;
+        modifier *= 1f + (percent / 100f);
     }
     public void SetPercentValue(float percent)
     {
         modifier = percent / 100f;
     }
+}
+
+public enum Attribute
+{
+    maxHealth,
+    healthRegen,
+    regenSpeed,
+    moveSpeed,
+    attackDamage,
+    attackSpeed,
+    projectileSpeed,
+    criticalChance,
+    criticalMultiplier,
+    pickupRange
 }

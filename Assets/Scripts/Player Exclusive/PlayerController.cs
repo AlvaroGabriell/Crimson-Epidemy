@@ -5,22 +5,24 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(HealthSystem))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AttributesSystem))]
+[RequireComponent(typeof(LevelSystem))]
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator animator;
     private HealthSystem health;
+    private LevelSystem level;
     [HideInInspector]
     public AttributesSystem attributes;
     private float horizontalMovement = 0f, verticalMovement = 0f;
     private bool isMoving = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<HealthSystem>();
         animator = GetComponent<Animator>();
+        level = GetComponent<LevelSystem>();
         attributes = GetComponent<AttributesSystem>();
 
         // Setting attributes
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
         attributes.projectileSpeed.SetBaseValue(8f);
         attributes.criticalChance.SetPercentValue(10f);
         attributes.criticalMultiplier.SetBaseValue(2f);
+        attributes.pickupRange.SetBaseValue(2.5f);
 
         health.attributes = attributes;
         health.SetMaxHealthAndFullHeal(attributes.maxHealth.FinalValue);
@@ -49,6 +52,7 @@ public class PlayerController : MonoBehaviour
         // ---------- Animator ----------
         isMoving = Mathf.Abs(horizontalMovement) > 0f || Mathf.Abs(verticalMovement) > 0f;
         animator.SetBool("isMoving", isMoving);
+        animator.SetFloat("moveSpeed", attributes.moveSpeed.FinalValue / 3);
 
         // ---------- Health ----------
         health.SetMaxHealth(attributes.maxHealth.FinalValue);
@@ -63,6 +67,21 @@ public class PlayerController : MonoBehaviour
                 health.TakeDamage(collision.GetComponent<EnemyBehaviour>().GetEnemyDamage());
                 Destroy(collision.gameObject);
             }
+        }
+        if (collision.CompareTag("Collectable"))
+        {
+            CollectableBehaviour collectable = collision.GetComponent<CollectableBehaviour>();
+            switch (collectable.GetCollectableType())
+            {
+                case CollectableType.Xp:
+                    level.AddXp(collectable.GetValue());
+                    break;
+                case CollectableType.Health:
+                    health.HealHealth(collectable.GetValue());
+                    //TODO: Tocar sfx de coletar vida
+                    break;
+            }
+            Destroy(collision.gameObject);
         }
     }
 

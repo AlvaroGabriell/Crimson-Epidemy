@@ -751,6 +751,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LogAttributes",
+                    "type": "Button",
+                    "id": "d774ab54-9e99-4c6e-935e-186f2c0b420c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -850,6 +859,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "ManualShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62b56b9b-2284-4890-b105-67cccbe0fa2f",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "LogAttributes",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
