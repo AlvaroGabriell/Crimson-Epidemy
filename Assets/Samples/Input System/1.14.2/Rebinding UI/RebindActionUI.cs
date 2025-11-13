@@ -277,12 +277,15 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             // the action map containing the target action.
             action.actionMap.Disable();
             m_UIInputActionMap?.Disable();
+            action.Disable();
 
             // Configure the rebind.
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
+            .WithControlsExcluding("<Mouse")
+            .WithCancelingThrough("<Keyboard>/escape")
                 .OnCancel(
                     operation =>
-                    {
+                    {   action.Enable();
                         m_RebindStopEvent?.Invoke(this, operation);
                         if (m_RebindOverlay != null)
                             m_RebindOverlay.SetActive(false);
@@ -291,10 +294,20 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                     })
                 .OnComplete(
                     operation =>
-                    {
+                    {   action.Enable();
                         if (m_RebindOverlay != null)
                             m_RebindOverlay.SetActive(false);
                         m_RebindStopEvent?.Invoke(this, operation);
+
+                        //Checando bindings duplicados?
+                        if (CheckForDuplicatesBindings(action, bindingIndex, allCompositeParts))
+                        {
+                            action.RemoveBindingOverride(bindingIndex);
+                            CleanUp();
+                            PerformInteractiveRebind(action,bindingIndex,allCompositeParts);
+                            return;
+                        }
+
                         UpdateBindingDisplay();
                         CleanUp();
 
@@ -332,6 +345,33 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_RebindStartEvent?.Invoke(this, m_RebindOperation);
 
             m_RebindOperation.Start();
+        }
+
+        private bool CheckForDuplicatesBindings(InputAction action, int bindingIndex, bool allCompositeParts = false)
+        {
+            InputBinding newBinding = action.bindings[bindingIndex];
+
+            foreach(InputBinding binding in action.actionMap.bindings)
+            {
+                if(binding.action == newBinding.action){continue;}
+                if(binding.effectivePath == newBinding.effectivePath)
+                {
+                    Debug.Log("Tecla já em uso: "+newBinding.effectivePath);
+                    return true;
+                }
+            }
+            if (allCompositeParts == true)
+            {
+                for(int i = 1; i < bindingIndex; i++)
+                {
+                    if (action.bindings[i].effectivePath == newBinding.overridePath)
+                    {
+                        Debug.Log("Tecla já em uso: "+newBinding.effectivePath);
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         protected void OnEnable()
