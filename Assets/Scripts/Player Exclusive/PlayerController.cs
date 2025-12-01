@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private LevelSystem level;
     [HideInInspector]
     public AttributesSystem attributes;
+
+    private float moveInput;
     private float horizontalMovement = 0f, verticalMovement = 0f;
     private bool isMoving = false;
 
@@ -97,6 +99,8 @@ public class PlayerController : MonoBehaviour
     //Captura o input de movimento
     public void OnMove(InputAction.CallbackContext context)
     {
+        moveInput = UserInput.instance.Movement.x; //--Gabriel: Resgatando do input as teclas de movimento originais ou alteradas
+        
         horizontalMovement = context.ReadValue<Vector2>().x;
         verticalMovement = context.ReadValue<Vector2>().y;
     }
