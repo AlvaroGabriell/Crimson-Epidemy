@@ -35,6 +35,7 @@ public class MusicLibrary : MonoBehaviour
 
     public string GetName()
     {
-        return Path.GetFileName(reference.Path);
+        RuntimeManager.GetEventDescription(reference).getPath(out string path);
+        return Path.GetFileName(path);
     }
 }

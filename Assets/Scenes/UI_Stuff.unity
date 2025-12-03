@@ -2795,7 +2795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &538791652
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4774,16 +4774,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 875014748}
   m_HandleRect: {fileID: 714483184}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2038094233}
-        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
-        m_MethodName: SetVolumeBGM
+      - m_Target: {fileID: 414832260}
+        m_TargetAssemblyTypeName: VolumeController, Assembly-CSharp
+        m_MethodName: SetMusicVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4876,15 +4876,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 1119346757}
   m_HandleRect: {fileID: 1110668005}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2038094233}
-        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
+      - m_Target: {fileID: 414832260}
+        m_TargetAssemblyTypeName: VolumeController, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 0
         m_Arguments:
@@ -5272,7 +5272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1039398550
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9299,16 +9299,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 1816723739}
   m_HandleRect: {fileID: 1588164978}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2038094233}
-        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
-        m_MethodName: SetVolumeSFX
+      - m_Target: {fileID: 414832260}
+        m_TargetAssemblyTypeName: VolumeController, Assembly-CSharp
+        m_MethodName: SetsfxVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9448,7 +9448,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f669e8616757cf478bf810f15d5b3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  audioMixer: {fileID: 24100000, guid: 102f593fc643566449a3a5891673345d, type: 2}
 --- !u!1 &2062553674
 GameObject:
   m_ObjectHideFlags: 0
