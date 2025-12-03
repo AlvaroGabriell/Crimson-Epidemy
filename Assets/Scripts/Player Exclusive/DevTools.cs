@@ -47,7 +47,7 @@ public class DevTools : MonoBehaviour
         theDev.rectTransform.Rotate(new Vector3(0, transform.rotation.eulerAngles.y + -180 * Time.deltaTime, 0));
         UpdatePlayerAttributes();
 
-        if (devModeActive) return;
+        if (devModeActive && !GameController.Instance.gameStarted) return;
 
         if (Keyboard.current.anyKey.wasPressedThisFrame)
         {
@@ -178,7 +178,7 @@ public class DevTools : MonoBehaviour
     {
         if (context.performed)
         {
-            SFXManager.Play("Pluh", audioSource);
+            SFXManager.Instance.PlaySFX(SFXManager.Instance.SFXLibrary.GetSFXByName("Pluh"));
         }
     }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,8 +18,8 @@ public class HealthSystem : MonoBehaviour
     public AttributesSystem attributes;
 
     [Header("SFX")]
-    public string damageSFX;
-    public string deathSFX;
+    public EventReference damageSFX;
+    public EventReference deathSFX;
 
     public event Action OnDeath;
 
@@ -50,14 +51,14 @@ public class HealthSystem : MonoBehaviour
 
         health = Mathf.Max(health - pDamage, 0);
 
-        if (!string.IsNullOrEmpty(damageSFX)) SFXManager.Play(damageSFX);
+        if (!damageSFX.IsNull) SFXManager.Instance.PlaySFX(SFXManager.Instance.SFXLibrary.GetSFXByReference(damageSFX));
 
         if (ShouldDie() && canDie == true) Die();
     }
 
     private void Die()
     {
-        if (!string.IsNullOrEmpty(deathSFX)) SFXManager.Play(deathSFX);
+        if (!deathSFX.IsNull) SFXManager.Instance.PlaySFX(SFXManager.Instance.SFXLibrary.GetSFXByReference(deathSFX));
 
         isAlive = false;
 

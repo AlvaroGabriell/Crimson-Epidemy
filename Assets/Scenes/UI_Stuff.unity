@@ -2286,6 +2286,179 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 402163960}
   m_CullTransparentMesh: 1
+--- !u!1 &414832259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 414832265}
+  - component: {fileID: 414832264}
+  - component: {fileID: 414832263}
+  - component: {fileID: 414832262}
+  - component: {fileID: 414832261}
+  - component: {fileID: 414832260}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &414832260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414832259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590ff1cb20230654c8dd85fedbc3e061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeController
+  masterVCAPath: vca:/Master_VCA
+  musicVCAPath: vca:/Music_VCA
+  sfxVCAPath: vca:/SFX_VCA
+--- !u!114 &414832261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414832259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24efc542df4b89f488fbd4cbbd5cb2c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SFXLibrary
+  SFXList:
+  - reference:
+      Guid:
+        Data1: -1551246011
+        Data2: 1194920693
+        Data3: 784575935
+        Data4: 2057931791
+      Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Footsteps
+  - reference:
+      Guid:
+        Data1: 878996068
+        Data2: 1110281714
+        Data3: 377279148
+        Data4: -709559339
+      Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Player take damage
+  - reference:
+      Guid:
+        Data1: 681018213
+        Data2: 1184806728
+        Data3: -1783925315
+        Data4: 843445964
+      Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Pluh
+  - reference:
+      Guid:
+        Data1: 1932811378
+        Data2: 1251228211
+        Data3: -82947685
+        Data4: -1326618419
+      Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Shoot arrow
+  - reference:
+      Guid:
+        Data1: 492625533
+        Data2: 1303903619
+        Data3: -1652927336
+        Data4: 1306829492
+      Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Zombie Dying
+  - reference:
+      Guid:
+        Data1: 1703179025
+        Data2: 1145029649
+        Data3: -474027876
+        Data4: 1128611042
+      Path: event:/Crimson epidemy FMOD/sfx/Menu/Menu click
+  - reference:
+      Guid:
+        Data1: -1236351619
+        Data2: 1297059580
+        Data3: 653176707
+        Data4: -1140224641
+      Path: event:/Crimson epidemy FMOD/sfx/Menu/Menu navigation
+--- !u!114 &414832262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414832259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544e52af5a1f9bd40989913ea5b7f87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SFXManager
+  SFXLibrary: {fileID: 0}
+--- !u!114 &414832263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414832259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11535ccd346205843a15cb58b530a8ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicLibrary
+  MusicList:
+  - reference:
+      Guid:
+        Data1: -598441363
+        Data2: 1146653624
+        Data3: 669054091
+        Data4: -1640816115
+      Path: event:/Crimson epidemy FMOD/musics/msc_ce_menu
+  - reference:
+      Guid:
+        Data1: 886620935
+        Data2: 1100990905
+        Data3: 2020699013
+        Data4: -2113278690
+      Path: event:/Crimson epidemy FMOD/musics/msc_ce_gameplay
+  - reference:
+      Guid:
+        Data1: 878996068
+        Data2: 1110281714
+        Data3: 377279148
+        Data4: -709559339
+      Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Player take damage
+--- !u!114 &414832264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414832259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe05fc0680a58a4da6e317132068d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicManager
+  musicLibrary: {fileID: 0}
+--- !u!4 &414832265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414832259}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.08171, y: -0.07307, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &424259980
 GameObject:
   m_ObjectHideFlags: 0
@@ -5753,83 +5926,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1218995831
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1218995833}
-  - component: {fileID: 1218995832}
-  - component: {fileID: 1218995834}
-  m_Layer: 0
-  m_Name: MusicManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1218995832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218995831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -598441363
-      Data2: 1146653624
-      Data3: 669054091
-      Data4: -1640816115
-    Path: event:/Crimson epidemy FMOD/musics/msc_ce_menu
-  Event: 
-  EventPlayTrigger: 1
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!4 &1218995833
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218995831}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.02018, y: -10.97096, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1218995834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218995831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe05fc0680a58a4da6e317132068d56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FmodUtils
-  music: {fileID: 1218995832}
 --- !u!1 &1272362559
 GameObject:
   m_ObjectHideFlags: 0
@@ -6537,6 +6633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03f79abb5471f64f8459c89850b936c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
+  enemyCount: 0
   isPaused: 0
   gameStarted: 0
 --- !u!4 &1467689957
@@ -9506,9 +9603,9 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1218995833}
   - {fileID: 1467689957}
   - {fileID: 2062553676}
+  - {fileID: 414832265}
   - {fileID: 1378824325}
   - {fileID: 1279567219}
   - {fileID: 875174528}

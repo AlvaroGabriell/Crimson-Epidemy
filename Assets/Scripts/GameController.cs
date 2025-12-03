@@ -28,19 +28,19 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        FirstStart();
-
-
+        BootGame();
 
         EnemyBehaviour.OnEnemyDeath += OnEnemyDeath;
         EnemyBehaviour.OnEnemySpawn += OnEnemySpawned;
     }
 
-    public void FirstStart()
+    public void BootGame()
     {
         gameStarted = false;
         Utils.GetPlayer().GetComponent<PlayerInput>().actions.FindActionMap("Player").Disable();
         Utils.GetPlayer().GetComponent<PlayerRangedAttack>().canShoot = false;
+
+        MusicManager.Instance.PlayMusic(MusicManager.Instance.musicLibrary.GetMusicByName("msc_ce_menu"));
     }
 
     public bool IsSceneLoaded(string sceneName)
@@ -56,6 +56,13 @@ public class GameController : MonoBehaviour
         return false;
     }
 
+    public void StartGame()
+    {
+        Utils.GetPlayer().GetComponent<PlayerRangedAttack>().canShoot = true;
+        Utils.GetPlayer().GetComponent<PlayerInput>().actions.FindActionMap("Player").Enable();
+        gameStarted = true;
+    }
+
     public void PauseGame()
     {
         Time.timeScale = 0f; // Pausa o jogo
@@ -66,12 +73,6 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 1f; // Retoma o jogo
         isPaused = false; // Atualiza o estado de pausa
-    }
-
-    public void StartGame()
-    {
-        Utils.GetPlayer().GetComponent<PlayerRangedAttack>().canShoot = true;
-        Utils.GetPlayer().GetComponent<PlayerInput>().actions.FindActionMap("Player").Enable();
     }
 
     public void RestartGame()

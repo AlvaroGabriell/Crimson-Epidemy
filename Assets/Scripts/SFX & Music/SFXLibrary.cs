@@ -1,42 +1,41 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using FMODUnity;
 using UnityEngine;
 
 public class SFXLibrary : MonoBehaviour
 {
-    [SerializeField] private SFXGroup[] sfxGroups;
-    private Dictionary<string, List<AudioClip>> soundDictionary;
+    [SerializeField] public List<SFX> SFXList;
 
-    void Awake()
+    public SFX GetSFXByName(string name)
     {
-        InitializeDictionary();
+        foreach (SFX sfx in SFXList)
+        {
+            if(sfx.Name.Equals(name)) return sfx;
+        }
+
+        return null;
     }
 
-    private void InitializeDictionary()
+    public SFX GetSFXByReference(EventReference reference)
     {
-        soundDictionary = new Dictionary<string, List<AudioClip>>();
-        foreach (SFXGroup sfxGroup in sfxGroups)
+        foreach (SFX sfx in SFXList)
         {
-            soundDictionary[sfxGroup.name] = sfxGroup.audioClips;
+            if(sfx.reference.Equals(reference)) return sfx;
         }
-    }
 
-    public AudioClip GetRandomClip(string name)
-    {
-        if (soundDictionary.ContainsKey(name))
-        {
-            List<AudioClip> audioClips = soundDictionary[name];
-            if (audioClips.Count > 0)
-            {
-                return audioClips[UnityEngine.Random.Range(0, audioClips.Count)];
-            }
-        }
         return null;
     }
 }
 
-[System.Serializable] public struct SFXGroup
+[Serializable] public class SFX
 {
-    public string name;
-    public List<AudioClip> audioClips;
+    public string Name => GetName();
+    public EventReference reference;
+
+    public string GetName()
+    {
+        return Path.GetFileName(reference.Path);
+    }
 }

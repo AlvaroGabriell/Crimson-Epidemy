@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Musics.bank
   Name: Musics
   StudioPath: bank:/Musics
-  lastModified: 639003368046325368
+  lastModified: 639003495499769599
   FileSizes: []
   Exists: 1
 --- !u!114 &-8255376876311168985
@@ -69,6 +69,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-5116490459197670450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/Pluh
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Pluh
+  Guid:
+    Data1: 681018213
+    Data2: 1184806728
+    Data3: -1783925315
+    Data4: 843445964
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5040085831926282364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +138,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/SFXs.bank
   Name: SFXs
   StudioPath: bank:/SFXs
-  lastModified: 639003368047507428
+  lastModified: 639003495499865148
   FileSizes: []
   Exists: 1
 --- !u!114 &-2763423614614083899
@@ -163,21 +190,18 @@ MonoBehaviour:
   - {fileID: 2936821109799112827}
   - {fileID: 2458018106895432311}
   - {fileID: -7947453095789697640}
-  - {fileID: 5287313600185801562}
   - {fileID: 302814029957747987}
-  - {fileID: 821474488201578498}
   - {fileID: -5040085831926282364}
   - {fileID: 1331630378476062003}
   - {fileID: -2763423614614083899}
-  - {fileID: 9196944745188458941}
-  - {fileID: 6469994824141162713}
+  - {fileID: -5116490459197670450}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5684604647001093973}
   StringsBanks:
   - {fileID: 6865102756231845519}
   cacheVersion: 131857
-  cacheTime: 639003368047507428
+  cacheTime: 639003495499865148
   SerializableEventsDict:
   - key: event:/Crimson epidemy FMOD/musics/msc_ce_gameplay
     index: 0
@@ -187,22 +211,16 @@ MonoBehaviour:
     index: 2
   - key: event:/Crimson epidemy FMOD/sfx/Gameplay/Footsteps
     index: 3
-  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect cure
-    index: 4
   - key: event:/Crimson epidemy FMOD/sfx/Gameplay/Player take damage
-    index: 5
-  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect xp
-    index: 6
+    index: 4
   - key: event:/Crimson epidemy FMOD/sfx/Gameplay/Shoot arrow
-    index: 7
+    index: 5
   - key: event:/Crimson epidemy FMOD/sfx/Menu/Menu navigation
-    index: 8
+    index: 6
   - key: event:/Crimson epidemy FMOD/sfx/Gameplay/Zombie Dying
-    index: 9
-  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Heal
-    index: 10
-  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/LVL up
-    index: 11
+    index: 7
+  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/Pluh
+    index: 8
 --- !u!114 &302814029957747987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,33 +248,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 426
---- !u!114 &821474488201578498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect xp
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect xp
-  Guid:
-    Data1: -153809813
-    Data2: 1104596157
-    Data3: 206927257
-    Data4: 1390601069
-  Banks:
-  - {fileID: -4914315420224968071}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &1331630378476062003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,33 +357,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 69818
---- !u!114 &5287313600185801562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect cure
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect cure
-  Guid:
-    Data1: 1209824595
-    Data2: 1228206489
-    Data3: 2057398413
-    Data4: 1260440651
-  Banks:
-  - {fileID: -4914315420224968071}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &5684604647001093973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,36 +372,9 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639003368032814991
+  lastModified: 639003495499500681
   FileSizes: []
   Exists: 1
---- !u!114 &6469994824141162713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/LVL up
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/LVL up
-  Guid:
-    Data1: 998394791
-    Data2: 1159021149
-    Data3: -819947841
-    Data4: -515478933
-  Banks:
-  - {fileID: -4914315420224968071}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &6865102756231845519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,35 +390,8 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639003368032837526
+  lastModified: 639003495499586729
   FileSizes:
   - Name: 
-    Value: 1498
+    Value: 1582
   Exists: 1
---- !u!114 &9196944745188458941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Heal
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Heal
-  Guid:
-    Data1: 263567237
-    Data2: 1112118543
-    Data3: -1225417028
-    Data4: -1217353282
-  Banks:
-  - {fileID: -4914315420224968071}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0

@@ -142,6 +142,6 @@ public class PlayerController : MonoBehaviour
 
     public void PlaySFX(string sfxName)
     {
-        SFXManager.Play(sfxName);
+        SFXManager.Instance.PlaySFX(SFXManager.Instance.SFXLibrary.GetSFXByName(sfxName));
     }
 }

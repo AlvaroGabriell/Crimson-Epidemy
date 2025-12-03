@@ -205,8 +205,20 @@ MonoBehaviour:
   canTakeDamage: 1
   isAlive: 1
   attributes: {fileID: 8315390142774352718}
-  damageSFX: 
-  deathSFX: ZombieDies
+  damageSFX:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  deathSFX:
+    Guid:
+      Data1: 492625533
+      Data2: 1303903619
+      Data3: -1652927336
+      Data4: 1306829492
+    Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Zombie Dying
 --- !u!114 &8315390142774352718
 MonoBehaviour:
   m_ObjectHideFlags: 0

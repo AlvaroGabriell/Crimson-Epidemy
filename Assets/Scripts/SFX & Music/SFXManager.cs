@@ -1,23 +1,21 @@
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SFXLibrary))]
 public class SFXManager : MonoBehaviour
 {
-    private static SFXManager Instance;
+    public static SFXManager Instance;
 
-    private static AudioSource audioSource;
-    private static SFXLibrary sfxLibrary;
-    [SerializeField] private Slider sfxSlider;
+    public SFXLibrary SFXLibrary;
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            audioSource = GetComponent<AudioSource>();
-            sfxLibrary = GetComponent<SFXLibrary>();
+            SFXLibrary = GetComponent<SFXLibrary>();
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -25,31 +23,9 @@ public class SFXManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    public static void Play(string soundName)
+    
+    public void PlaySFX(SFX sfx)
     {
-        AudioClip audioClip = sfxLibrary.GetRandomClip(soundName);
-        if (audioClip != null) audioSource.PlayOneShot(audioClip);
-    }
-    public static void Play(string soundName, AudioSource substitute)
-    {
-        AudioClip audioClip = sfxLibrary.GetRandomClip(soundName);
-        if (audioClip != null) substitute.PlayOneShot(audioClip);
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        sfxSlider.onValueChanged.AddListener(delegate { OnValueChanged(); });
-    }
-
-    public static void SetVolume(float volume)
-    {
-        audioSource.volume = volume;
-    }
-
-    public void OnValueChanged()
-    {
-        SetVolume(sfxSlider.value);
+        RuntimeManager.PlayOneShot(sfx.reference);
     }
 }
