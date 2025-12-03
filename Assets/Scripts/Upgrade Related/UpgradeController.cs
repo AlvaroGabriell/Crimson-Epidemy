@@ -39,7 +39,7 @@ public class UpgradeController : MonoBehaviour
     public void OpenUpgradeScreen(int CurrentLevel)
     {
         player.GetComponent<HealthSystem>().HealFullHealth();
-        Time.timeScale = 0;
+        GameController.Instance.PauseGame();
         UpgradeScreen.SetActive(true);
 
         for(int i = 0; i < 3; i++)
@@ -53,18 +53,15 @@ public class UpgradeController : MonoBehaviour
 
             currentCards.Add(cardGameObject);
         }
-
-        //TODO: Abrir a tela de upgrades e pausar o jogo.
     }
     public void CloseUpgradeScreen()
     {
         player.GetComponent<HealthSystem>().HealFullHealth(); // Guarantee
         UpgradeScreen.SetActive(false);
-        Time.timeScale = 1;
+        GameController.Instance.ResumeGame();
 
         foreach (GameObject card in currentCards) Destroy(card);
         currentCards.Clear();
-        //TODO: Fechar a tela de upgrades e despausar o jogo.
     }
 
 }

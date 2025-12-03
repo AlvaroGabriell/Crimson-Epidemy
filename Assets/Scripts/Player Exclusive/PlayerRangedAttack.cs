@@ -4,12 +4,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerRangedAttack : MonoBehaviour
 {
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject bullet, BulletsGroup;
     private GameObject player, bulletInstance;
     private AttributesSystem playerAttributes;
     private Vector2 mouseWorldPosition, direction;
     public float shootInterval = 2f;
-    public bool canShoot = true;
+    public bool canShoot = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +28,7 @@ public class PlayerRangedAttack : MonoBehaviour
             {
                 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                 direction = (mouseWorldPosition - (Vector2)player.transform.position).normalized;
-                bulletInstance = Instantiate(bullet, player.transform.position, Quaternion.FromToRotation(Vector3.right, direction));
+                bulletInstance = Instantiate(bullet, player.transform.position, Quaternion.FromToRotation(Vector3.right, direction), BulletsGroup.transform);
 
                 bulletInstance.GetComponent<BulletBehaviour>().playerAttributes = playerAttributes;
             }

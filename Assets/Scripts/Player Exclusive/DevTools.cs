@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -21,8 +22,9 @@ public class DevTools : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject zombiePrefab, bulletPrefab, devScreen;
+    [SerializeField] private GameObject zombiePrefab, bulletPrefab, BulletsGroup, devScreen, attributesScreen;
     [SerializeField] private RawImage theDev;
+    private TextMeshProUGUI attributesText;
     private AudioSource audioSource;
 
     [Header("Tools")]
@@ -35,6 +37,7 @@ public class DevTools : MonoBehaviour
     {
         player = gameObject;
         audioSource = GetComponent<AudioSource>();
+        attributesText = attributesScreen.GetComponent<TextMeshProUGUI>();
         GetComponent<PlayerInput>().actions.FindActionMap("DevMode").Disable();
     }
 
@@ -42,6 +45,7 @@ public class DevTools : MonoBehaviour
     void Update()
     {
         theDev.rectTransform.Rotate(new Vector3(0, transform.rotation.eulerAngles.y + -180 * Time.deltaTime, 0));
+        UpdatePlayerAttributes();
 
         if (devModeActive) return;
 
@@ -178,24 +182,32 @@ public class DevTools : MonoBehaviour
         }
     }
 
-    public void LogPlayerAttributes(InputAction.CallbackContext context)
+    public void HideShowPlayerAttributes(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            var attributes = player.GetComponent<PlayerController>().attributes.GetAttributeDictionary();
-            var health = player.GetComponent<HealthSystem>().GetHealth();
-            System.Text.StringBuilder sb = new();
-
-            sb.AppendLine("health: " + health);
-
-            foreach (var kvp in attributes)
-            {
-                var attrName = kvp.Key.ToString();
-                var attribute = kvp.Value;
-                sb.AppendLine($"{attrName}: {attribute.baseValue} * {attribute.modifier} = {attribute.FinalValue}");
-            }
-
-            Debug.Log(sb.ToString());
+            attributesScreen.SetActive(!attributesScreen.activeSelf);
         }
+    }
+
+    private void UpdatePlayerAttributes()
+    {
+        var attributes = player.GetComponent<PlayerController>().attributes.GetAttributeDictionary();
+        var health = player.GetComponent<HealthSystem>().GetHealth();
+        var level = player.GetComponent<LevelSystem>();
+
+        System.Text.StringBuilder sb = new();
+
+        sb.AppendLine($"level: {level.CurrentLevel} ({level.CurrentXp}/{level.XpToNextLevel})");
+        sb.AppendLine("health: " + health);
+
+        foreach (var kvp in attributes)
+        {
+            var attrName = kvp.Key.ToString();
+            var attribute = kvp.Value;
+            sb.AppendLine($"{attrName}: {attribute.baseValue} * {attribute.modifier} = {attribute.FinalValue}");
+        }
+
+        attributesText.text = sb.ToString();
     }
 }

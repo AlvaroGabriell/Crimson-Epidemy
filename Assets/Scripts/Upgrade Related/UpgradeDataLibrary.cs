@@ -8,6 +8,19 @@ public class UpgradeDataLibrary : MonoBehaviour
 
     public UpgradeData GetRandomUpgradeData()
     {
+        float totalWeight = 0f;
+
+        foreach(var upgrade in upgradesData) totalWeight += upgrade.weight;
+
+        float randomValue = UnityEngine.Random.value * totalWeight;
+
+        foreach(var upgrade in upgradesData)
+        {
+            randomValue -= upgrade.weight;
+            if(randomValue <= 0f) return upgrade;
+        }
+
+        // Fallback
         return upgradesData[UnityEngine.Random.Range(0, upgradesData.Count)];
     }
 }

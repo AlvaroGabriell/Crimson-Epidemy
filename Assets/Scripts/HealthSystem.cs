@@ -1,18 +1,26 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/** <summary>
+* Script da vida. Seta um valor de vida máximo para o objeto, com variáveis pra controlar se
+* o objeto pode tomar dano, pode morrer e se está vivo. Tem também métodos pra mudar a vida,
+* pegar, curar e dar dano. 
+* </summary> **/
 public class HealthSystem : MonoBehaviour
 {
     [Header("Health")]
     private float health; 
     [SerializeField] private float maxHealth = 20f;
-    public bool canDie = true, canRegen = false, regenActive = false, canTakeDamage = true, isAlive = true;
+    public bool canDie = true, canRegen = true, regenActive = false, canTakeDamage = true, isAlive = true;
     public AttributesSystem attributes;
 
     [Header("SFX")]
     public string damageSFX;
     public string deathSFX;
+
+    public event Action OnDeath;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +36,7 @@ public class HealthSystem : MonoBehaviour
     public void SetMaxHealthAndFullHeal(float pMaxHealth)
     {
         maxHealth = pMaxHealth;
-        health = maxHealth;
+        HealFullHealth();
     }
 
     public void SetHealth(float pHealth)
@@ -50,9 +58,10 @@ public class HealthSystem : MonoBehaviour
     private void Die()
     {
         if (!string.IsNullOrEmpty(deathSFX)) SFXManager.Play(deathSFX);
-        if (gameObject.CompareTag("Enemy")) gameObject.GetComponent<EnemyBehaviour>().DropLoot();
 
-        Destroy(gameObject);
+        isAlive = false;
+
+        OnDeath?.Invoke();
     }
 
     public void HealHealth(float pHealing)
@@ -74,13 +83,16 @@ public class HealthSystem : MonoBehaviour
         return health <= 0;
     }
 
-    public void StartOrStopRegen()
+    public void StartRegen()
     {
-        if (regenActive) StartCoroutine(Regen());
-        else StopCoroutine(Regen());
+        StartCoroutine(Regen());
+    }
+    public void StopRegen()
+    {
+        StopCoroutine(Regen());
     }
     
-    // Player-only method. Should not be called in non-player object, although it is possible.
+    // Should not be called in non-player object, although it is possible.
     private IEnumerator Regen()
     {
         while (true)
@@ -90,8 +102,7 @@ public class HealthSystem : MonoBehaviour
                 HealHealth(attributes.healthRegen.FinalValue);
             }
 
-            float regenInterval = 5f / attributes.regenSpeed.FinalValue;
-
+            float regenInterval = Mathf.Max(5f / attributes.regenSpeed.FinalValue, 0f);
             yield return new WaitForSeconds(regenInterval);
         }
     }

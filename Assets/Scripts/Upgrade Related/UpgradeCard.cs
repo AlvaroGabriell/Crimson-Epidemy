@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,8 +23,7 @@ public class UpgradeCard : MonoBehaviour
 
     public void Setup(UpgradeData pUpgradeData)
     {
-        upImage.sprite =
-        pUpgradeData.upgradeImage;
+        upImage.sprite = pUpgradeData.upgradeImage;
         upName.text = pUpgradeData.upgradeName;
         upDescription.text = pUpgradeData.upgradeDescription;
         attributesToUpgrade = pUpgradeData.attributesToUpgrade;
@@ -42,6 +42,7 @@ public struct UpgradeData
     public string upgradeName;
     [TextArea]
     public string upgradeDescription;
+    [Range(0f, 100f)]public float weight;
     public List<AttributeUpgrade> attributesToUpgrade;
 }
 

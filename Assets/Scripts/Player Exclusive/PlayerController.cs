@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AttributesSystem))]
 [RequireComponent(typeof(LevelSystem))]
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
@@ -19,8 +21,12 @@ public class PlayerController : MonoBehaviour
     private float horizontalMovement = 0f, verticalMovement = 0f;
     private bool isMoving = false;
 
+    public event Action OnPlayerDeath;
+
     void Awake()
     {
+        GetComponent<PlayerInput>().SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current, Mouse.current);
+
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<HealthSystem>();
         animator = GetComponent<Animator>();
@@ -41,12 +47,19 @@ public class PlayerController : MonoBehaviour
 
         health.attributes = attributes;
         health.SetMaxHealthAndFullHeal(attributes.maxHealth.FinalValue);
+
+        health.OnDeath += OnDeath;
     }
 
     void FixedUpdate()
     {
         HandleMovement();
         UpdateValues();
+    }
+
+    void Update()
+    {
+        VerifyIfCanRegen();
     }
 
     void UpdateValues()
@@ -58,6 +71,28 @@ public class PlayerController : MonoBehaviour
 
         // ---------- Health ----------
         health.SetMaxHealth(attributes.maxHealth.FinalValue);
+    }
+
+    private void VerifyIfCanRegen()
+    {
+        if(attributes.healthRegen.FinalValue > 0 && !health.regenActive)
+        {
+            health.regenActive = true;
+            health.StartRegen();
+        }
+        else if (attributes.healthRegen.FinalValue <= 0 && health.regenActive)
+        {
+            health.regenActive = false;
+            health.StopRegen();
+        }
+    }
+
+    private void OnDeath()
+    {
+        OnPlayerDeath?.Invoke();
+        gameObject.SetActive(false);
+        GetComponent<PlayerInput>().actions.FindActionMap("Player").Disable();
+        OnPlayerDeath?.Invoke();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -76,7 +111,7 @@ public class PlayerController : MonoBehaviour
             switch (collectable.GetCollectableType())
             {
                 case CollectableType.Xp:
-                    level.AddXp(collectable.GetValue());
+                    level.AddXp((int)collectable.GetValue());
                     break;
                 case CollectableType.Health:
                     health.HealHealth(collectable.GetValue());

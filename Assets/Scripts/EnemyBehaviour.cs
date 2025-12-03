@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -14,6 +16,9 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private int level = 1;
     [SerializeField] private GameObject xpPrefab, healthPrefab;
 
+    public static event Action<EnemyBehaviour> OnEnemyDeath;
+    public static event Action<EnemyBehaviour> OnEnemySpawn;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -23,7 +28,16 @@ public class EnemyBehaviour : MonoBehaviour
         health = GetComponent<HealthSystem>();
         health.attributes = attributes;
 
+        attributes.healthRegen.SetBaseValue(0f);
+        attributes.regenSpeed.SetBaseValue(1f);
+
         if (player == null) player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    void Start()
+    {
+        health.OnDeath += OnDeath;
+        OnEnemySpawn?.Invoke(this);
     }
 
     void FixedUpdate()
@@ -50,14 +64,40 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    private void OnDeath()
+    {
+        DropLoot();
+        OnEnemyDeath.Invoke(this);
+        Destroy(gameObject);
+    }
+
     public void DropLoot()
     {
-        GameObject xpInstance = Instantiate(xpPrefab, gameObject.transform.position, Quaternion.identity);
-        xpInstance.GetComponent<CollectableBehaviour>().SetValue(5);
-
-        if(Random.Range(1, 4) == 1)
+        int xpAmount = 1;
+        Vector2 offset;
+        Vector3 dropPos;
+        if(UnityEngine.Random.value <= 0.10f)
         {
-            GameObject healthInstance = Instantiate(healthPrefab, gameObject.transform.position, Quaternion.identity);
+            xpAmount++;
+        }
+
+        while(xpAmount > 0)
+        {
+            offset = UnityEngine.Random.insideUnitCircle * 0.3f;
+            dropPos = transform.position + (Vector3)offset;
+
+            GameObject xpInstance = Instantiate(xpPrefab, dropPos, Quaternion.identity);
+            xpInstance.GetComponent<CollectableBehaviour>().SetValue(5);
+
+            xpAmount--;
+        }
+
+        if(UnityEngine.Random.Range(1, 4) == 1)
+        {
+            offset = UnityEngine.Random.insideUnitCircle * 0.3f;
+            dropPos = transform.position + (Vector3)offset;
+
+            GameObject healthInstance = Instantiate(healthPrefab, dropPos, Quaternion.identity);
             healthInstance.GetComponent<CollectableBehaviour>().SetValue(10);
         }
     }

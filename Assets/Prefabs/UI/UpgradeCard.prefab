@@ -231,8 +231,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Descri\xE7\xE3o do Upgrade\nDescri\xE7\xE3o do Upgrade\nDescri\xE7\xE3o
-    do Upgrade\nDescri\xE7\xE3o do Upgrade\nDescri\xE7\xE3o do Upgrade"
+  m_text: "Descri\xE7\xE3o do Upgrade aqui \xF3 \nDescri\xE7\xE3o do Upgrade aqui
+    \xF3 \nDescri\xE7\xE3o do Upgrade aqui \xF3 \nDescri\xE7\xE3o do Upgrade aqui
+    \xF3 \nDescri\xE7\xE3o do Upgrade aqui \xF3 \nDescri\xE7\xE3o do Upgrade aqui
+    \xF3 "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: de54f9736796fa2459e84f6aecf112cc, type: 2}
   m_sharedMaterial: {fileID: 155576330519783569, guid: de54f9736796fa2459e84f6aecf112cc, type: 2}
@@ -259,8 +261,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38
-  m_fontSizeBase: 38
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

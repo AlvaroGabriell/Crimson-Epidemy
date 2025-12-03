@@ -4,10 +4,10 @@ using UnityEngine;
 public class LevelSystem : MonoBehaviour
 {
     public int CurrentLevel { get; private set; } = 1;
-    public float CurrentXp { get; private set; } = 0f;
-    public float XpToNextLevel => GetRequiredXpToLevelUp(CurrentLevel);
+    public int CurrentXp { get; private set; } = 0;
+    public int XpToNextLevel => GetRequiredXpToLevelUp(CurrentLevel);
 
-    [SerializeField] private float baseXpRequirement = 10f;
+    [SerializeField] private int baseXpRequirement = 10;
     [SerializeField] private float xpGrowthMultiplier = 1.25f;
 
     public event Action<int> OnLevelUp;
@@ -19,7 +19,7 @@ public class LevelSystem : MonoBehaviour
         upgradeController = FindFirstObjectByType<UpgradeController>();
     }
 
-    public void AddXp(float amount)
+    public void AddXp(int amount)
     {
         CurrentXp += amount;
 
@@ -39,8 +39,8 @@ public class LevelSystem : MonoBehaviour
         if(upgradeController != null) upgradeController.OpenUpgradeScreen(CurrentLevel);
     }
     
-    private float GetRequiredXpToLevelUp(int level)
+    private int GetRequiredXpToLevelUp(int level)
     {
-        return baseXpRequirement * Mathf.Pow(xpGrowthMultiplier, level - 1);
+        return (int)(baseXpRequirement * Mathf.Pow(xpGrowthMultiplier, level - 1));
     }
 }
