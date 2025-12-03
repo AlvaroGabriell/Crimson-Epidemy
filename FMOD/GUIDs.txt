@@ -1,0 +1,19 @@
+{c009207e-0e89-4e18-8fc7-aa482bceeb61} bank:/Master
+{581400aa-7ff2-025a-098e-20b6da3dedf9} bank:/Master.strings
+{d75860e7-a793-4c34-96e6-49ba084d98ce} bank:/Musics
+{35271d8d-9e10-47ca-8b5f-0181c9c8a42e} bank:/SFXs
+{6c801e0f-a2ad-4ba0-a9f1-68c629fdefd0} bus:/
+{ce7e9f21-058e-4724-88dd-da55e840d7a3} bus:/Reverb
+{34d8c307-c9b9-419f-856b-71781eed0982} event:/Crimson epidemy FMOD/musics/msc_ce_gameplay
+{dc54826d-8bb8-4458-8bf4-e0270d22339e} event:/Crimson epidemy FMOD/musics/msc_ce_menu
+{a389dd45-0af5-4739-bfad-c32e0f8ca97a} event:/Crimson epidemy FMOD/sfx/Gameplay/Footsteps
+{34646a64-8df2-422d-acd2-7c16d5fbb4d5} event:/Crimson epidemy FMOD/sfx/Gameplay/Player take damage
+{73345c72-3a33-4a94-9b51-0efbcd68edb0} event:/Crimson epidemy FMOD/sfx/Gameplay/Shoot arrow
+{481c7553-f199-4934-8d68-a17a4bcc204b} event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect cure
+{f6d50c6b-ccbd-41d6-9975-550c6de3e252} event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect xp
+{0fb5b785-950f-4249-bc9e-f5b6bea970b7} event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Heal
+{3b824ba7-425d-4515-bf96-20cf6b6a46e1} event:/Crimson epidemy FMOD/sfx/Gameplay/To do/LVL up
+{1d5cde7d-fd83-4db7-9854-7a9db4a2e44d} event:/Crimson epidemy FMOD/sfx/Gameplay/Zombie Dying
+{65847311-c411-443f-9ce8-bee3e23c4543} event:/Crimson epidemy FMOD/sfx/Menu/Menu click
+{b64ec57d-8efc-4d4f-83af-ee267f8d09bc} event:/Crimson epidemy FMOD/sfx/Menu/Menu navigation
+{e5273067-d80a-4acf-8f89-1dcae2728fca} parameter:/enemyCount
