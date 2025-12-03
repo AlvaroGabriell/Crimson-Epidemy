@@ -66,7 +66,7 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Crimson-Epidemy.sln",
+    "dotnet.defaultSolution": "Crimson-Epidemy.slnx",
     "vscode_custom_css.imports": [
         "file:///C:/Users/Carto/.vscode/extensions/thecodemonkey.synthwave-x-fluoromachine-epic-animations-1.4.13/synthwave-x-fluoromachine.css",
         "file:///C:/Users/Carto/.vscode/extensions/thecodemonkey.synthwave-x-fluoromachine-epic-animations-1.4.13/epic-80s-transitions.css"

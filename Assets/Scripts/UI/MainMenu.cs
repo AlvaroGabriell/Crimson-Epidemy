@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
         //-> Álvaro
         GameController.Instance.StartGame();
         gameObject.SetActive(false);
+        FmodUtils.Instance.StopMusic();
         /**
         * O jogo é iniciado no GameController. A cena iniciada por padrão pela Unity é a UI, e logo em seguida o script GameController
         * dá load de forma aditiva na cena Principal, que contêm o jogo em si, o Player, Inputs, a câmera e etc... Portanto a cena Principal

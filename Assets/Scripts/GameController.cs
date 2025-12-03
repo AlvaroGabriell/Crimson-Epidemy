@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     
-    private int enemyCount = 0;
+    public int enemyCount = 0;
     public bool isPaused = false, gameStarted = false;
 
     // ----- Generic -----

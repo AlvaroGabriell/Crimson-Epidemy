@@ -1,0 +1,487 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8758454313587013107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Musics.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: FMOD/Desktop/Musics.bank
+  Name: Musics
+  StudioPath: bank:/Musics
+  lastModified: 639003368046325368
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-8255376876311168985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/msc_ce_gameplay/enemyCount
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: enemyCount
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 1982632677
+    data2: 247030943
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7947453095789697640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/Footsteps
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Footsteps
+  Guid:
+    Data1: -1551246011
+    Data2: 1194920693
+    Data3: 784575935
+    Data4: 2057931791
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5040085831926282364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/Shoot arrow
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Shoot arrow
+  Guid:
+    Data1: 1932811378
+    Data2: 1251228211
+    Data3: -82947685
+    Data4: -1326618419
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4914315420224968071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFXs.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: FMOD/Desktop/SFXs.bank
+  Name: SFXs
+  StudioPath: bank:/SFXs
+  lastModified: 639003368047507428
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-2763423614614083899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/Zombie Dying
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Zombie Dying
+  Guid:
+    Data1: 492625533
+    Data2: 1303903619
+    Data3: -1652927336
+    Data4: 1306829492
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1189
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
+  EditorBanks:
+  - {fileID: 6865102756231845519}
+  - {fileID: 5684604647001093973}
+  - {fileID: -8758454313587013107}
+  - {fileID: -4914315420224968071}
+  EditorEvents:
+  - {fileID: 2052374561905041972}
+  - {fileID: 2936821109799112827}
+  - {fileID: 2458018106895432311}
+  - {fileID: -7947453095789697640}
+  - {fileID: 5287313600185801562}
+  - {fileID: 302814029957747987}
+  - {fileID: 821474488201578498}
+  - {fileID: -5040085831926282364}
+  - {fileID: 1331630378476062003}
+  - {fileID: -2763423614614083899}
+  - {fileID: 9196944745188458941}
+  - {fileID: 6469994824141162713}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 5684604647001093973}
+  StringsBanks:
+  - {fileID: 6865102756231845519}
+  cacheVersion: 131857
+  cacheTime: 639003368047507428
+  SerializableEventsDict:
+  - key: event:/Crimson epidemy FMOD/musics/msc_ce_gameplay
+    index: 0
+  - key: event:/Crimson epidemy FMOD/musics/msc_ce_menu
+    index: 1
+  - key: event:/Crimson epidemy FMOD/sfx/Menu/Menu click
+    index: 2
+  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/Footsteps
+    index: 3
+  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect cure
+    index: 4
+  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/Player take damage
+    index: 5
+  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect xp
+    index: 6
+  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/Shoot arrow
+    index: 7
+  - key: event:/Crimson epidemy FMOD/sfx/Menu/Menu navigation
+    index: 8
+  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/Zombie Dying
+    index: 9
+  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Heal
+    index: 10
+  - key: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/LVL up
+    index: 11
+--- !u!114 &302814029957747987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/Player take damage
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/Player take damage
+  Guid:
+    Data1: 878996068
+    Data2: 1110281714
+    Data3: 377279148
+    Data4: -709559339
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 426
+--- !u!114 &821474488201578498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect xp
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect xp
+  Guid:
+    Data1: -153809813
+    Data2: 1104596157
+    Data3: 206927257
+    Data4: 1390601069
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1331630378476062003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Menu/Menu navigation
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Menu/Menu navigation
+  Guid:
+    Data1: -1236351619
+    Data2: 1297059580
+    Data3: 653176707
+    Data4: -1140224641
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2052374561905041972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/musics/msc_ce_gameplay
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/musics/msc_ce_gameplay
+  Guid:
+    Data1: 886620935
+    Data2: 1100990905
+    Data3: 2020699013
+    Data4: -2113278690
+  Banks:
+  - {fileID: -8758454313587013107}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8255376876311168985}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6857
+--- !u!114 &2458018106895432311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Menu/Menu click
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Menu/Menu click
+  Guid:
+    Data1: 1703179025
+    Data2: 1145029649
+    Data3: -474027876
+    Data4: 1128611042
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2936821109799112827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/musics/msc_ce_menu
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/musics/msc_ce_menu
+  Guid:
+    Data1: -598441363
+    Data2: 1146653624
+    Data3: 669054091
+    Data4: -1640816115
+  Banks:
+  - {fileID: -8758454313587013107}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 69818
+--- !u!114 &5287313600185801562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect cure
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Collect cure
+  Guid:
+    Data1: 1209824595
+    Data2: 1228206489
+    Data3: 2057398413
+    Data4: 1260440651
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5684604647001093973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: FMOD/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639003368032814991
+  FileSizes: []
+  Exists: 1
+--- !u!114 &6469994824141162713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/LVL up
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/LVL up
+  Guid:
+    Data1: 998394791
+    Data2: 1159021149
+    Data3: -819947841
+    Data4: -515478933
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6865102756231845519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: FMOD/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639003368032837526
+  FileSizes:
+  - Name: 
+    Value: 1498
+  Exists: 1
+--- !u!114 &9196944745188458941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Heal
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Crimson epidemy FMOD/sfx/Gameplay/To do/Heal
+  Guid:
+    Data1: 263567237
+    Data2: 1112118543
+    Data3: -1225417028
+    Data4: -1217353282
+  Banks:
+  - {fileID: -4914315420224968071}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
