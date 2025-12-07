@@ -3,14 +3,15 @@ using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerRangedAttack : MonoBehaviour
+public class PlayerRangedAttackController : MonoBehaviour
 {
     [SerializeField] private GameObject bullet, BulletsGroup;
     private GameObject player, bulletInstance;
     private AttributesSystem playerAttributes;
     private Vector2 mouseWorldPosition, direction;
-    public float shootInterval = 2f;
+    public float shootInterval;
     public bool canShoot = false;
+    public float TimeSinceLastShot { get; private set; } = 0f;
     public EventReference arrowShootSFX;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,7 +19,17 @@ public class PlayerRangedAttack : MonoBehaviour
     {
         player = gameObject;
         playerAttributes = player.GetComponent<AttributesSystem>();
+        shootInterval = 2f / playerAttributes.attackSpeed.FinalValue;
         StartCoroutine(Shoot());
+    }
+
+    void Update()
+    {
+        shootInterval = 2f / playerAttributes.attackSpeed.FinalValue;
+
+        TimeSinceLastShot += Time.deltaTime;
+
+        if(TimeSinceLastShot > shootInterval) TimeSinceLastShot = shootInterval; // Por segurança
     }
 
     private IEnumerator Shoot()
@@ -33,12 +44,18 @@ public class PlayerRangedAttack : MonoBehaviour
                 bulletInstance = Instantiate(bullet, player.transform.position, Quaternion.FromToRotation(Vector3.right, direction), BulletsGroup.transform);
                 SFXManager.Instance.PlaySFX(SFXManager.Instance.SFXLibrary.GetSFXByReference(arrowShootSFX));
 
-                bulletInstance.GetComponent<BulletBehaviour>().playerAttributes = playerAttributes;
-            }
+                bulletInstance.GetComponent<BulletBehaviour>().Setup(playerAttributes, DamageSource.PLAYER);
+                if (IsCriticalHit(playerAttributes)) bulletInstance.GetComponent<BulletBehaviour>().TurnIntoCriticalHit();
 
-            shootInterval = 2f / playerAttributes.attackSpeed.FinalValue;
+                TimeSinceLastShot = 0f;
+            }
 
             yield return new WaitForSeconds(shootInterval);
         }
+    }
+
+    public static bool IsCriticalHit(AttributesSystem attributes)
+    {
+        return Random.value < attributes.criticalChance.FinalValue || attributes.criticalChance.FinalValue >= 1f;
     }
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 929227b4f1c527943b45f22ad7e40f1b
+guid: 594d49dd5950a9c42a7ed2dd0995a16b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7819440781255666307
-    second: cE_sprite_ZombiePlaceholder_0
+      213: 865637465794196238
+    second: Xp_Orb_Placehold_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 14
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cE_sprite_ZombiePlaceholder_0
+      name: Xp_Orb_Placehold_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 20
-        height: 30
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 38a62fc16fb348c60800000000000000
-      internalID: 7819440781255666307
+      spriteID: e03bee450bc530c00800000000000000
+      internalID: 865637465794196238
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cE_sprite_ZombiePlaceholder_0: 7819440781255666307
+      Xp_Orb_Placehold_0: 865637465794196238
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

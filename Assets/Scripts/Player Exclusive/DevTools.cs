@@ -1,11 +1,9 @@
-using System;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerInput))]
-[RequireComponent(typeof(AudioSource))]
 public class DevTools : MonoBehaviour
 {
 
@@ -22,30 +20,29 @@ public class DevTools : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject zombiePrefab, bulletPrefab, BulletsGroup, devScreen, attributesScreen;
-    [SerializeField] private RawImage theDev;
-    private TextMeshProUGUI attributesText;
-    private AudioSource audioSource;
+    [SerializeField] private GameObject zombiePrefab, bulletPrefab, BulletsGroup, devScreen, playerInfoGO, roundInfoGO;
+    [SerializeField] private GameObject theDev1, theDev2;
+    private TextMeshProUGUI playerInfoText, roundInfoText;
 
     [Header("Tools")]
     public bool manualShoot = false;
-
-    private GameObject zombieInstance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = gameObject;
-        audioSource = GetComponent<AudioSource>();
-        attributesText = attributesScreen.GetComponent<TextMeshProUGUI>();
+        playerInfoText = playerInfoGO.GetComponent<TextMeshProUGUI>();
+        roundInfoText = roundInfoGO.GetComponent<TextMeshProUGUI>();
         GetComponent<PlayerInput>().actions.FindActionMap("DevMode").Disable();
     }
 
     // Update is called once per frame
     void Update()
     {
-        theDev.rectTransform.Rotate(new Vector3(0, transform.rotation.eulerAngles.y + -180 * Time.deltaTime, 0));
-        UpdatePlayerAttributes();
+        theDev1.GetComponent<RectTransform>().transform.Rotate(new Vector3(0,  -180 * Time.deltaTime, 0));
+        theDev2.GetComponent<RectTransform>().transform.Rotate(new Vector3(transform.rotation.eulerAngles.x + -180 * Time.deltaTime, 0, 0));
+        UpdatePlayerInfo();
+        UpdateRoundInfo();
 
         if (devModeActive && !GameController.Instance.gameStarted) return;
 
@@ -80,12 +77,29 @@ public class DevTools : MonoBehaviour
         }
     }
 
-    private void ActivateDevMode()
+    public void ActivateDevMode()
     {
         devModeActive = true;
         GetComponent<PlayerInput>().actions.FindActionMap("DevMode").Enable();
         devScreen.SetActive(true);
         Debug.Log("Dev Mode activated!");
+    }
+
+    public void DeactivateDevMod()
+    {
+        devModeActive = false;
+        GetComponent<PlayerInput>().actions.FindActionMap("DevMode").Disable();
+        devScreen.SetActive(false);
+
+        player.GetComponent<HealthSystem>().HealFullHealth();
+        player.GetComponent<HealthSystem>().canDie = true;
+
+        player.GetComponent<PlayerRangedAttackController>().canShoot = true;
+        manualShoot = false;
+
+        currentIndex = 0;
+
+        Debug.Log("Dev Mode deactivated! Everything back to normal.");
     }
 
     public void HideShowMenu(InputAction.CallbackContext context)
@@ -100,7 +114,7 @@ public class DevTools : MonoBehaviour
         if (context.performed)
         {
             Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            zombieInstance = Instantiate(zombiePrefab, new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, 0), Quaternion.identity);
+            EnemySpawner.SpawnEnemy(new Vector2(mouseWorldPosition.x, mouseWorldPosition.y));
             Debug.Log("Zombie spawned!");
         }
     }
@@ -108,7 +122,8 @@ public class DevTools : MonoBehaviour
     {
         if (context.performed)
         {
-            SpawnsZombieAtMouse(context);
+            Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            GameObject zombieInstance = EnemySpawner.SpawnEnemy(new Vector2(mouseWorldPosition.x, mouseWorldPosition.y));
             zombieInstance.GetComponent<HealthSystem>().canDie = false;
             Debug.Log("Immortal zombie spawned.");
         }
@@ -125,11 +140,11 @@ public class DevTools : MonoBehaviour
     {
         if (context.performed)
         {
-            player.GetComponent<HealthSystem>().SetHealth(20f);
+            player.GetComponent<HealthSystem>().HealFullHealth();
             player.GetComponent<HealthSystem>().canDie = true;
             Debug.Log("Player is now mortal.");
         }
-    }
+    } 
     public void KillAllZombies(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -137,7 +152,7 @@ public class DevTools : MonoBehaviour
             GameObject[] zombiesArray = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject zombie in zombiesArray)
             {
-                Destroy(zombie);
+                zombie.GetComponent<HealthSystem>().Kill(DamageSource.VOID);
             }
             if (zombiesArray.Length > 0) Debug.Log("All zombies killed.");
             else Debug.Log("No zombies found.");
@@ -149,13 +164,13 @@ public class DevTools : MonoBehaviour
         {
             if (manualShoot)
             {
-                player.GetComponent<PlayerRangedAttack>().canShoot = true;
+                player.GetComponent<PlayerRangedAttackController>().canShoot = true;
                 manualShoot = false;
                 Debug.Log("Shooting Mode: Automatic");
             }
             else
             {
-                player.GetComponent<PlayerRangedAttack>().canShoot = false;
+                player.GetComponent<PlayerRangedAttackController>().canShoot = false;
                 manualShoot = true;
                 Debug.Log("Shooting Mode: Manual");
             }
@@ -170,8 +185,18 @@ public class DevTools : MonoBehaviour
                 Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                 Vector2 direction = (mouseWorldPosition - (Vector2)player.transform.position).normalized;
                 GameObject bulletInstance = Instantiate(bulletPrefab, player.transform.position, Quaternion.FromToRotation(Vector3.right, direction));
-                bulletInstance.GetComponent<BulletBehaviour>().playerAttributes = player.GetComponent<AttributesSystem>();
+                bulletInstance.GetComponent<BulletBehaviour>().Setup(player.GetComponent<AttributesSystem>(), DamageSource.PLAYER);
+                if (PlayerRangedAttackController.IsCriticalHit(player.GetComponent<AttributesSystem>())) bulletInstance.GetComponent<BulletBehaviour>().TurnIntoCriticalHit();
             }
+        }
+    }
+    public void RestartGame(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            DeactivateDevMod();
+            Debug.Log("Game Restarting.");
+            GameController.Instance.RestartGame();
         }
     }
     public void EasterEgg(InputAction.CallbackContext context)
@@ -182,21 +207,24 @@ public class DevTools : MonoBehaviour
         }
     }
 
-    public void HideShowPlayerAttributes(InputAction.CallbackContext context)
+    public void HideShowGameInfo(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            attributesScreen.SetActive(!attributesScreen.activeSelf);
+            playerInfoGO.SetActive(!playerInfoGO.activeSelf);
+            roundInfoGO.SetActive(!roundInfoGO.activeSelf);
         }
     }
 
-    private void UpdatePlayerAttributes()
+    private void UpdatePlayerInfo()
     {
         var attributes = player.GetComponent<PlayerController>().attributes.GetAttributeDictionary();
         var health = player.GetComponent<HealthSystem>().GetHealth();
         var level = player.GetComponent<LevelSystem>();
 
-        System.Text.StringBuilder sb = new();
+        StringBuilder sb = new();
+
+        sb.AppendLine("> Player Info:");
 
         sb.AppendLine($"level: {level.CurrentLevel} ({level.CurrentXp}/{level.XpToNextLevel})");
         sb.AppendLine("health: " + health);
@@ -207,7 +235,37 @@ public class DevTools : MonoBehaviour
             var attribute = kvp.Value;
             sb.AppendLine($"{attrName}: {attribute.baseValue} * {attribute.modifier} = {attribute.FinalValue}");
         }
+        
+        playerInfoText.text = sb.ToString();
+    }
 
-        attributesText.text = sb.ToString();
+    private void UpdateRoundInfo()
+    {
+        StringBuilder sb = new();
+
+        sb.AppendLine("> Round Info:");
+        sb.AppendLine($"timeDifficulty: {SpawningInfo.lastTimeDifficulty:F2}");
+        sb.AppendLine($"levelDifficulty: {SpawningInfo.lastLevelDifficulty:F2}");
+        sb.AppendLine($"killDifficulty: {SpawningInfo.lastKillDifficulty:F2}\n");
+
+        sb.AppendLine($"zombies alive: {GameController.Instance.enemyCount}");
+        sb.AppendLine($"zombies killed: {GameController.Instance.killedEnemies}\n");
+
+        sb.AppendLine($"enemy spawn interval: {SpawningInfo.spawnInterval:F2}\n");
+
+        if(SpawningInfo.lastSpawnedZombie == null)
+        {
+            sb.AppendLine("> No zombies yet.");
+        } else
+        {
+            var attributes = SpawningInfo.lastSpawnedZombie.GetComponent<AttributesSystem>();
+            sb.AppendLine("> Last Spawned Zombie Stats:");
+
+            sb.AppendLine($"maxHealth: {attributes.maxHealth.baseValue:F2} * {attributes.maxHealth.modifier:F2} = {attributes.maxHealth.FinalValue:F2}");
+            sb.AppendLine($"moveSpeed: {attributes.moveSpeed.baseValue:F2} * {attributes.moveSpeed.modifier:F2} = {attributes.moveSpeed.FinalValue:F2}");
+            sb.AppendLine($"attackDamage: {attributes.attackDamage.baseValue:F2} * {attributes.attackDamage.modifier:F2} = {attributes.attackDamage.FinalValue:F2}");
+        }
+
+        roundInfoText.text = sb.ToString();
     }
 }

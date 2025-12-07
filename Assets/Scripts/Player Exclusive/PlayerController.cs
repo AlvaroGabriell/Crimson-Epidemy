@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalMovement = 0f, verticalMovement = 0f;
     private bool isMoving = false;
 
-    public event Action OnPlayerDeath;
+    public static event Action OnPlayerDeath;
 
     void Awake()
     {
@@ -38,17 +38,22 @@ public class PlayerController : MonoBehaviour
         attributes.healthRegen.SetBaseValue(0f);
         attributes.regenSpeed.SetBaseValue(2f);
         attributes.moveSpeed.SetBaseValue(3f);
-        attributes.attackDamage.SetBaseValue(5f);
-        attributes.attackSpeed.SetBaseValue(1f);
+        attributes.attackDamage.SetBaseValue(6.5f);
+        attributes.attackSpeed.SetBaseValue(1.5f);
         attributes.projectileSpeed.SetBaseValue(8f);
-        attributes.criticalChance.SetPercentValue(10f);
+        attributes.criticalChance.SetPercentValue(5f);
         attributes.criticalMultiplier.SetBaseValue(2f);
-        attributes.pickupRange.SetBaseValue(2.5f);
+        attributes.pickupRange.SetBaseValue(3f);
 
         health.attributes = attributes;
         health.SetMaxHealthAndFullHeal(attributes.maxHealth.FinalValue);
 
         health.OnDeath += OnDeath;
+    }
+
+    void OnDestroy()
+    {
+        health.OnDeath -= OnDeath;
     }
 
     void FixedUpdate()
@@ -68,9 +73,6 @@ public class PlayerController : MonoBehaviour
         isMoving = Mathf.Abs(horizontalMovement) > 0f || Mathf.Abs(verticalMovement) > 0f;
         animator.SetBool("isMoving", isMoving);
         animator.SetFloat("moveSpeed", attributes.moveSpeed.FinalValue / 3);
-
-        // ---------- Health ----------
-        health.SetMaxHealth(attributes.maxHealth.FinalValue);
     }
 
     private void VerifyIfCanRegen()
@@ -87,9 +89,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDeath()
+    private void OnDeath(DamageSource source)
     {
-        OnPlayerDeath?.Invoke();
         gameObject.SetActive(false);
         GetComponent<PlayerInput>().actions.FindActionMap("Player").Disable();
         OnPlayerDeath?.Invoke();
@@ -99,10 +100,11 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            if (collision.GetComponent<EnemyBehaviour>() != null)
+            var enemy = collision.transform.parent.gameObject;
+            if (enemy.GetComponent<EnemyBehaviour>() != null)
             {
-                health.TakeDamage(collision.GetComponent<EnemyBehaviour>().GetEnemyDamage());
-                Destroy(collision.gameObject);
+                health.TakeDamage(enemy.GetComponent<EnemyBehaviour>().GetEnemyDamage(), DamageSource.ENEMY);
+                enemy.GetComponent<HealthSystem>().Kill(DamageSource.PLAYER);
             }
         }
         if (collision.CompareTag("Collectable"))

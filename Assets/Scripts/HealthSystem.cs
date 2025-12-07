@@ -21,13 +21,20 @@ public class HealthSystem : MonoBehaviour
     public EventReference damageSFX;
     public EventReference deathSFX;
 
-    public event Action OnDeath;
+    private Coroutine regenCoroutine;
+
+    public event Action<DamageSource> OnDeath;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (gameObject.GetComponent<AttributesSystem>() != null) SetMaxHealthAndFullHeal(gameObject.GetComponent<AttributesSystem>().maxHealth.FinalValue);
         else health = maxHealth;
+    }
+
+    void Update()
+    {
+        if(maxHealth != attributes.maxHealth.FinalValue) SetMaxHealthAndFullHeal(attributes.maxHealth.FinalValue);
     }
 
     public void SetMaxHealth(float pMaxHealth)
@@ -39,13 +46,17 @@ public class HealthSystem : MonoBehaviour
         maxHealth = pMaxHealth;
         HealFullHealth();
     }
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
 
     public void SetHealth(float pHealth)
     {
         health = pHealth;
     }
 
-    public void TakeDamage(float pDamage)
+    public void TakeDamage(float pDamage, DamageSource source)
     {
         if (!canTakeDamage || !isAlive) return;
 
@@ -53,16 +64,23 @@ public class HealthSystem : MonoBehaviour
 
         if (!damageSFX.IsNull) SFXManager.Instance.PlaySFX(SFXManager.Instance.SFXLibrary.GetSFXByReference(damageSFX));
 
-        if (ShouldDie() && canDie == true) Die();
+        if (ShouldDie() && canDie == true) Die(source);
     }
 
-    private void Die()
+    public void Kill(DamageSource source)
+    {
+        if(!isAlive) return;
+
+        Die(source);
+    }
+
+    private void Die(DamageSource source)
     {
         if (!deathSFX.IsNull) SFXManager.Instance.PlaySFX(SFXManager.Instance.SFXLibrary.GetSFXByReference(deathSFX));
 
         isAlive = false;
 
-        OnDeath?.Invoke();
+        OnDeath?.Invoke(source);
     }
 
     public void HealHealth(float pHealing)
@@ -86,11 +104,11 @@ public class HealthSystem : MonoBehaviour
 
     public void StartRegen()
     {
-        StartCoroutine(Regen());
+        regenCoroutine = StartCoroutine(Regen());
     }
     public void StopRegen()
     {
-        StopCoroutine(Regen());
+        if(regenCoroutine != null) StopCoroutine(regenCoroutine);
     }
     
     // Should not be called in non-player object, although it is possible.
@@ -103,8 +121,17 @@ public class HealthSystem : MonoBehaviour
                 HealHealth(attributes.healthRegen.FinalValue);
             }
 
-            float regenInterval = Mathf.Max(5f / attributes.regenSpeed.FinalValue, 0f);
+            float regenInterval = Mathf.Max(4f / attributes.regenSpeed.FinalValue, 0f);
             yield return new WaitForSeconds(regenInterval);
         }
     }
+}
+
+public enum DamageSource
+{
+    PLAYER,
+    ENEMY,
+    ENVIRONMENT,
+    SELF,
+    VOID
 }

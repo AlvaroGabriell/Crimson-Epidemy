@@ -7,18 +7,21 @@ TagManager:
   - Enemy
   - Projectile
   - Collectable
+  - HUD
+  - Weapon
+  - Group
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PickupHitbox
+  - PlayerKillArea
+  - Enemy
+  - Projectile
+  - Collectable
   - 
   - 
   - 
@@ -44,11 +47,14 @@ TagManager:
   - name: Background
     uniqueID: 714758357
     locked: 0
-  - name: Projectile
-    uniqueID: 3791300945
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: LivingBeing
+    uniqueID: 4222499637
+    locked: 0
+  - name: Projectile
+    uniqueID: 3791300945
     locked: 0
   m_RenderingLayers:
   - Default

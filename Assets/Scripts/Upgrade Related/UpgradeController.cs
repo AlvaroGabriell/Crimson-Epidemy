@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(UpgradeDataLibrary))]
 public class UpgradeController : MonoBehaviour
@@ -23,14 +24,30 @@ public class UpgradeController : MonoBehaviour
         upgradeDataLibrary = GetComponent<UpgradeDataLibrary>();
     }
 
-    public void ApplyUpgrade(List<AttributeUpgrade> attributesToUpgrade)
+    public void ApplyUpgrade(UpgradeData upgradeData)
     {
-        foreach (AttributeUpgrade upgrade in attributesToUpgrade)
+        switch (upgradeData.type)
         {
-            ScalableAttribute attribute = playerAttributes.GetAttributeByType(upgrade.attribute);
+            case UpgradeType.Attribute:
+                foreach (AttributeUpgrade upgrade in upgradeData.attributesToUpgrade)
+                {
+                    ScalableAttribute attribute = playerAttributes.GetAttributeByType(upgrade.attribute);
 
-            if (upgrade.upgradeValueType == UpgradeValueType.baseValue) attribute.ApplyBaseUpgrade(upgrade.value);
-            else if (upgrade.upgradeValueType == UpgradeValueType.modifier) attribute.ApplyPercentUpgrade(upgrade.value);
+                    if (upgrade.upgradeValueType == UpgradeValueType.baseValue) attribute.ApplyBaseUpgrade(upgrade.value);
+                    else if (upgrade.upgradeValueType == UpgradeValueType.modifier) attribute.ApplyPercentUpgrade(upgrade.value);
+                }
+                break;
+
+            case UpgradeType.Weapon:
+                var weaponController = player.GetComponent<PlayerOrbitalKnifeController>();
+                switch (upgradeData.weaponUpgrade.weaponType)
+                {
+                    case WeaponType.OrbitalKnife:
+                        weaponController.AddKnives((int)upgradeData.weaponUpgrade.amount);
+                        break;
+
+                }
+                break;
         }
 
         CloseUpgradeScreen();
@@ -51,12 +68,14 @@ public class UpgradeController : MonoBehaviour
 
             card.Setup(data);
 
+            cardGameObject.transform.Find("UpgradeImage").GetComponent<Image>().SetNativeSize();
+
             currentCards.Add(cardGameObject);
         }
     }
     public void CloseUpgradeScreen()
     {
-        player.GetComponent<HealthSystem>().HealFullHealth(); // Guarantee
+        player.GetComponent<HealthSystem>().SetMaxHealthAndFullHeal(playerAttributes.maxHealth.FinalValue); // Guarantee
         UpgradeScreen.SetActive(false);
         GameController.Instance.ResumeGame();
 

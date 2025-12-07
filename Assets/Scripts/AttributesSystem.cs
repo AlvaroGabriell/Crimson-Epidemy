@@ -60,6 +60,10 @@ public class ScalableAttribute
     {
         baseValue = amount;
     }
+    public float GetBaseValue()
+    {
+        return baseValue;
+    }
     public void ApplyPercentUpgrade(float percent)
     {
         modifier *= 1f + (percent / 100f);
@@ -67,6 +71,10 @@ public class ScalableAttribute
     public void SetPercentValue(float percent)
     {
         modifier = percent / 100f;
+    }
+    public float GetPercentValue()
+    {
+        return modifier * 100f;
     }
 }
 

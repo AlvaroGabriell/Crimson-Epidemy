@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UpgradeCard : MonoBehaviour
 {
-    private List<AttributeUpgrade> attributesToUpgrade;
+    private UpgradeData upgradeData;
     private UpgradeController upgradeController;
 
     private Image upImage;
@@ -23,15 +23,15 @@ public class UpgradeCard : MonoBehaviour
 
     public void Setup(UpgradeData pUpgradeData)
     {
+        upgradeData = pUpgradeData;
         upImage.sprite = pUpgradeData.upgradeImage;
         upName.text = pUpgradeData.upgradeName;
         upDescription.text = pUpgradeData.upgradeDescription;
-        attributesToUpgrade = pUpgradeData.attributesToUpgrade;
     }
 
     public void OnClick()
     {
-        upgradeController.ApplyUpgrade(attributesToUpgrade);
+        upgradeController.ApplyUpgrade(upgradeData);
     }
 }
 
@@ -43,7 +43,27 @@ public struct UpgradeData
     [TextArea]
     public string upgradeDescription;
     [Range(0f, 100f)]public float weight;
+
+    public UpgradeType type;
     public List<AttributeUpgrade> attributesToUpgrade;
+    public WeaponUpgrade weaponUpgrade;
+}
+
+public enum UpgradeType
+{
+    Attribute,
+    Weapon
+}
+
+public enum UpgradeValueType
+{
+    baseValue,
+    modifier
+}
+
+public enum WeaponType
+{
+    OrbitalKnife
 }
 
 [Serializable]
@@ -55,8 +75,9 @@ public struct AttributeUpgrade
     public float value;
 }
 
-public enum UpgradeValueType
+[Serializable]
+public struct WeaponUpgrade
 {
-    baseValue,
-    modifier
+    public WeaponType weaponType;
+    public float amount;
 }

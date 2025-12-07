@@ -2,12 +2,17 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    public void OpenMainMenu()
+    {
+        gameObject.SetActive(true);
+    }
+
     public void StartGame()
     {//BuildIndex - 0 = Main Menu; 1 = Game;
         //TO DO: Antes de lançar o jogo, alterar código conforme instruções acima:
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
-        //SceneManager.LoadScene(0); // -> Álvaro: --; Explicação abaixo.
+        //SceneManager.LoadScene(0); // -> Álvaro: --; Removi. Explicação abaixo.
 
         //-> Álvaro
         GameController.Instance.StartGame();

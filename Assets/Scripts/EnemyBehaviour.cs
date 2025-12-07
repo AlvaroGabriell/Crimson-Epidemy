@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -8,18 +7,16 @@ using UnityEngine;
 [RequireComponent(typeof(HealthSystem))]
 public class EnemyBehaviour : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject player, collectablesGroup;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private AttributesSystem attributes;
     private HealthSystem health;
-    [SerializeField] private int level = 1;
     [SerializeField] private GameObject xpPrefab, healthPrefab;
 
-    public static event Action<EnemyBehaviour> OnEnemyDeath;
+    public static event Action<EnemyBehaviour, DamageSource> OnEnemyDeath;
     public static event Action<EnemyBehaviour> OnEnemySpawn;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,16 +25,25 @@ public class EnemyBehaviour : MonoBehaviour
         health = GetComponent<HealthSystem>();
         health.attributes = attributes;
 
+        attributes.maxHealth.SetBaseValue(20f);
         attributes.healthRegen.SetBaseValue(0f);
-        attributes.regenSpeed.SetBaseValue(1f);
+        attributes.moveSpeed.SetBaseValue(2f);
+        attributes.attackDamage.SetBaseValue(5f);
+        attributes.criticalChance.SetPercentValue(0f);
 
-        if (player == null) player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) player = Utils.GetPlayer();
     }
 
     void Start()
     {
         health.OnDeath += OnDeath;
         OnEnemySpawn?.Invoke(this);
+        if(Utils.TryGetGroupByName("CollectablesGroup", out GameObject group)) collectablesGroup = group;
+    }
+
+    void OnDestroy()
+    {
+        health.OnDeath -= OnDeath;
     }
 
     void FixedUpdate()
@@ -47,27 +53,22 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void FollowPlayer()
     {
-        // Move o inimigo
         Vector2 direction = (player.transform.position - transform.position).normalized;
         rb.linearVelocity = direction * attributes.moveSpeed.FinalValue;
 
-        //Rotaciona e flipa o sprite do inimigo
-        //transform.right = direction;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        if (angle > 90 || angle < -90)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
-        }
+        spriteRenderer.flipX = angle > 90 || angle < -90;
     }
 
-    private void OnDeath()
+    private void OnDeath(DamageSource source)
     {
-        DropLoot();
-        OnEnemyDeath.Invoke(this);
+        switch (source)
+        {
+            case DamageSource.PLAYER:
+                DropLoot();
+                break;
+        }
+        OnEnemyDeath.Invoke(this, source);
         Destroy(gameObject);
     }
 
@@ -86,18 +87,18 @@ public class EnemyBehaviour : MonoBehaviour
             offset = UnityEngine.Random.insideUnitCircle * 0.3f;
             dropPos = transform.position + (Vector3)offset;
 
-            GameObject xpInstance = Instantiate(xpPrefab, dropPos, Quaternion.identity);
+            GameObject xpInstance = Instantiate(xpPrefab, dropPos, Quaternion.identity, collectablesGroup.transform);
             xpInstance.GetComponent<CollectableBehaviour>().SetValue(5);
 
             xpAmount--;
         }
 
-        if(UnityEngine.Random.Range(1, 4) == 1)
+        if(UnityEngine.Random.Range(1, 6) == 1)
         {
             offset = UnityEngine.Random.insideUnitCircle * 0.3f;
             dropPos = transform.position + (Vector3)offset;
 
-            GameObject healthInstance = Instantiate(healthPrefab, dropPos, Quaternion.identity);
+            GameObject healthInstance = Instantiate(healthPrefab, dropPos, Quaternion.identity, collectablesGroup.transform);
             healthInstance.GetComponent<CollectableBehaviour>().SetValue(10);
         }
     }
@@ -105,14 +106,5 @@ public class EnemyBehaviour : MonoBehaviour
     public float GetEnemyDamage()
     {
         return attributes.attackDamage.FinalValue;
-    }
-
-    public void SetEnemyLevel(int level)
-    {
-        this.level = level;
-    }
-    public int GetEnemyLevel()
-    {
-        return level;
     }
 }
