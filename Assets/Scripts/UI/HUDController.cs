@@ -10,8 +10,8 @@ public class HUDController : MonoBehaviour
 
     [Header("Fillables")]
     public RectMask2D hpMask;
-    public RectMask2D xpMask, shootingMask;
-    public TextMeshProUGUI hpText, xpText, timerText;
+    public RectMask2D xpMask, shootingMask,upgradesMask,lifeMask;
+    public TextMeshProUGUI hpText, xpText, timerText,lifeCountText;
 
     void Awake()
     {
@@ -37,6 +37,7 @@ public class HUDController : MonoBehaviour
         SetFill(hpMask, Utils.GetPlayer().GetComponent<HealthSystem>().GetHealth(), Utils.GetPlayer().GetComponent<HealthSystem>().GetMaxHealth());
         SetFill(xpMask, Utils.GetPlayer().GetComponent<LevelSystem>().CurrentXp, Utils.GetPlayer().GetComponent<LevelSystem>().XpToNextLevel);
         SetFill(shootingMask, Utils.GetPlayer().GetComponent<PlayerRangedAttackController>().TimeSinceLastShot, Utils.GetPlayer().GetComponent<PlayerRangedAttackController>().shootInterval);
+        //SetFill(upgradesMask,Utils.GetPlayer().GetComponent<>())
 
         hpText.text = Utils.GetPlayer().GetComponent<HealthSystem>().GetHealth().ToString("F1");
         xpText.text = Utils.GetPlayer().GetComponent<LevelSystem>().CurrentLevel.ToString("F0");
