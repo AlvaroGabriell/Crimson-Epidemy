@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 41534cdca90513444abd759249c2f805
+guid: acd3309de685f0d4db204d09021762b2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5563534716559401754
-    second: botao_tela-inicial_0
+      213: -2989862817029859004
+    second: tela-inicial_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: botao_tela-inicial_0
+      name: tela-inicial_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 24
-        width: 496
-        height: 116
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a13a31c0955a53d40800000000000000
-      internalID: 5563534716559401754
+      spriteID: 44959cfdb9fd186d0800000000000000
+      internalID: -2989862817029859004
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      botao_tela-inicial_0: 5563534716559401754
+      tela-inicial_0: -2989862817029859004
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
