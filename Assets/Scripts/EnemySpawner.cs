@@ -157,11 +157,11 @@ public class EnemySpawner : MonoBehaviour
         float AttackDamageUp = (timeDifficulty * 50f) + (levelDifficulty * 5f) + (killDifficulty * 2f);
         enemyAttributes.attackDamage.ApplyPercentUpgrade(AttackDamageUp);
 
-        bool isMutant = GameController.Instance.killedEnemies >= 1000 && Random.value <= 0.30f;
+        bool isMutant = GameController.Instance.killedEnemies >= 1000 && Random.value <= 0.10f;
         if(isMutant)
         {
             enemyAttributes.maxHealth.ApplyPercentUpgrade(healthUp);
-            enemyAttributes.moveSpeed.ApplyPercentUpgrade(moveSpeedUp/2);
+            enemyAttributes.moveSpeed.ApplyPercentUpgrade(moveSpeedUp/3);
             enemyAttributes.attackDamage.ApplyPercentUpgrade(AttackDamageUp);
             enemy.GetComponent<SpriteRenderer>().color = Color.red;
         }
