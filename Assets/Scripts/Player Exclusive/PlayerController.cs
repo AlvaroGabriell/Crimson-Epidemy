@@ -93,6 +93,8 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.SetActive(false);
         GetComponent<PlayerInput>().actions.FindActionMap("Player").Disable();
+        GetComponent<PlayerOrbitalKnifeController>().KnivesGroup.SetActive(false);
+        GameController.Instance.LoseGame();
         OnPlayerDeath?.Invoke();
     }
 

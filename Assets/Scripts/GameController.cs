@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     
-    public bool isPaused = false, gameStarted = false;
+    public bool isPaused = false, gameStarted = false, gameFinished = false;
 
     public int enemyCount = 0, killedEnemies = 0;
 
@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     public static event Action OnGameStarted;
     public static event Action OnGameWon;
     public static event Action OnGameLost;
-    public static event Action OnTimerFinished;
+    //public static event Action OnTimerFinished;
 
 
 
@@ -45,8 +45,6 @@ public class GameController : MonoBehaviour
 
         EnemyBehaviour.OnEnemyDeath += OnEnemyDeath;
         EnemyBehaviour.OnEnemySpawn += OnEnemySpawned;
-
-        PlayerController.OnPlayerDeath += OnPlayerDeath;
     }
 
     void OnDestroy()
@@ -59,7 +57,7 @@ public class GameController : MonoBehaviour
     {
         if(IsTimerRunning && !isPaused) RoundTime -= Time.deltaTime;
 
-        if(RoundTime <= 0f) FinishTime();
+        if(RoundTime <= 0f && !gameFinished) FinishTime();
     }
 
     public bool IsSceneLoaded(string sceneName)
@@ -95,6 +93,8 @@ public class GameController : MonoBehaviour
         StartTimer();
         gameStarted = true;
         OnGameStarted?.Invoke();
+
+        MusicManager.Instance.PlayMusic(MusicManager.Instance.musicLibrary.GetMusicByName("msc_ce_gameplay"));
     }
 
     public void PauseGame()
@@ -111,27 +111,36 @@ public class GameController : MonoBehaviour
         ResumeTimer();
     }
 
-    public void RestartGame()
+    public void LoseGame()
+    {
+        PauseTimer();
+        gameFinished = true;
+        OnGameLost?.Invoke();
+    }
+
+    public void RestartGame(bool toMainMenu)
     {
         if(isPaused) ResumeGame();
-        enemyCount = 0;
+        gameStarted = false; IsTimerRunning = false; gameFinished = false;
+        enemyCount = 0; killedEnemies = 0;
         PauseTimer();
         ResetTimer();
-        killedEnemies = 0;
         MusicManager.Instance.currentMusic.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         SFXManager.Instance.StopAllRunningSFX();
 
-        StartCoroutine(ReloadPrincipalScene());
+        StartCoroutine(ReloadPrincipalScene(toMainMenu));
 
         Debug.Log("Game Restarted!");
     }
 
-    IEnumerator ReloadPrincipalScene()
+    IEnumerator ReloadPrincipalScene(bool toMainMenu)
     {
         yield return SceneManager.UnloadSceneAsync("Game");
 
         yield return SceneManager.LoadSceneAsync("Game", LoadSceneMode.Additive);
-        BootGame();
+
+        if(toMainMenu) BootGame();
+        else StartGame();
     }
 
 
@@ -145,15 +154,6 @@ public class GameController : MonoBehaviour
     {
         enemyCount--;
         killedEnemies++;
-    }
-
-
-
-    // ----- Enemy Management -----
-    private void OnPlayerDeath()
-    {
-        PauseTimer();
-        OnGameLost?.Invoke();
     }
 
 
@@ -180,8 +180,11 @@ public class GameController : MonoBehaviour
     }
     public void FinishTime()
     {
+        gameFinished = true;
         PauseTimer();
+        PauseGame();
         RoundTime = 0f;
-        OnTimerFinished?.Invoke();
+        //OnTimerFinished?.Invoke();
+        OnGameWon?.Invoke();
     }
 }

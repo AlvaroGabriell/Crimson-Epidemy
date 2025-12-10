@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -53,6 +54,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void FollowPlayer()
     {
+        if(player.IsUnityNull() || !player.activeSelf) return;
         Vector2 direction = (player.transform.position - transform.position).normalized;
         rb.linearVelocity = direction * attributes.moveSpeed.FinalValue;
 

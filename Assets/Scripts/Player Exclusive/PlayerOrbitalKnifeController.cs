@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerOrbitalKnifeController : MonoBehaviour
 {
-    [SerializeField] private GameObject orbitalKnifePrefab, KnivesGroup;
+    public GameObject orbitalKnifePrefab, KnivesGroup;
     private GameObject player, knifeInstance;
     private AttributesSystem playerAttributes;
     private float radius = 3.4f, baseRotationSpeed = 90f;

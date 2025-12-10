@@ -22,8 +22,7 @@ public class EnemySpawner : MonoBehaviour
     private Coroutine spawnCoroutine;
     private Transform playerTransform;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         playerTransform = Utils.GetPlayer().transform;
 
@@ -31,8 +30,9 @@ public class EnemySpawner : MonoBehaviour
         EnemiesGroup = _EnemiesGroup;
 
         GameController.OnGameStarted += StartSpawnLoop;
-        GameController.OnGameWon += StopSpawnLoop;
-        GameController.OnTimerFinished += SpawnBoss;
+        GameController.OnGameWon += OnGameWon;
+        GameController.OnGameLost += OnGameLost;
+        //GameController.OnTimerFinished += SpawnBoss;
 
         EnemyBehaviour.OnEnemyDeath += OnEnemyDeath;
     }
@@ -40,18 +40,21 @@ public class EnemySpawner : MonoBehaviour
     void OnDestroy()
     {
         GameController.OnGameStarted -= StartSpawnLoop;
-        GameController.OnGameWon -= StopSpawnLoop;
-        GameController.OnTimerFinished -= SpawnBoss;
+        GameController.OnGameWon -= OnGameWon;
+        GameController.OnGameLost -= OnGameLost;
+        //GameController.OnTimerFinished -= SpawnBoss;
 
         EnemyBehaviour.OnEnemyDeath -= OnEnemyDeath;
     }
 
     void StartSpawnLoop()
     {
+        Debug.Log("Starting spawn loop");
         spawnCoroutine = StartCoroutine(SpawnLoop());
     }
     void StopSpawnLoop()
     {
+        Debug.Log("Stopping spawn loop");
         if(spawnCoroutine != null) StopCoroutine(spawnCoroutine);
     }
 
@@ -129,18 +132,18 @@ public class EnemySpawner : MonoBehaviour
 
     float GetDynamicSpawnInterval()
     {
-        GetDifficulties(out float timeFactor, out float levelFactor, out float killFactor);          
+        GetDifficulties(out float timeFactor, out float levelFactor, out float killFactor, 0.05f, 0.01f, 2f);          
 
         float finalInterval = baseSpawnInterval - (baseSpawnInterval * timeFactor) - levelFactor;
 
-        finalInterval -= killFactor;
+        finalInterval -= killFactor / 2;
 
         return Mathf.Clamp(finalInterval, minSpawnInterval, maxSpawnInterval);
     }
 
     static void ScaleEnemyStats(GameObject enemy)
     {
-        GetDifficulties(out float timeDifficulty, out float levelDifficulty, out float killDifficulty);
+        GetDifficulties(out float timeDifficulty, out float levelDifficulty, out float killDifficulty, 0.15f);
 
         SpawningInfo.lastTimeDifficulty = timeDifficulty;
         SpawningInfo.lastLevelDifficulty = levelDifficulty;
@@ -157,31 +160,49 @@ public class EnemySpawner : MonoBehaviour
         float AttackDamageUp = (timeDifficulty * 50f) + (levelDifficulty * 5f) + (killDifficulty * 2f);
         enemyAttributes.attackDamage.ApplyPercentUpgrade(AttackDamageUp);
 
-        bool isMutant = GameController.Instance.killedEnemies >= 1000 && Random.value <= 0.10f;
+        bool isMutant = (GameController.Instance.killedEnemies >= 1000 || GameController.Instance.RoundTime <= 180) && Random.value <= 0.03f;
         if(isMutant)
         {
-            enemyAttributes.maxHealth.ApplyPercentUpgrade(healthUp);
-            enemyAttributes.moveSpeed.ApplyPercentUpgrade(moveSpeedUp/3);
-            enemyAttributes.attackDamage.ApplyPercentUpgrade(AttackDamageUp);
+            float mutantExtraHealth = 50f;
+            float mutantExtraSpeed  = 10f;
+            float mutantExtraDamage = 35f;
+
+            enemyAttributes.maxHealth.ApplyPercentUpgrade(mutantExtraHealth);
+            enemyAttributes.moveSpeed.ApplyPercentUpgrade(mutantExtraSpeed);
+            enemyAttributes.attackDamage.ApplyPercentUpgrade(mutantExtraDamage);
+
             enemy.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
         SpawningInfo.lastSpawnedZombie = enemy;
     }
 
-    public static void GetDifficulties(out float timeDifficulty, out float levelDifficulty, out float killDifficulty)
+    public static void GetDifficulties(out float timeDifficulty, out float levelDifficulty, out float killDifficulty, float levelFactor = 0.05f, float killsFactor = 0.01f, float killsDifficultyMax = 3f)
     {
         float playerLevel = Utils.GetPlayer().GetComponent<LevelSystem>().CurrentLevel;
         float timeLeft = GameController.Instance.RoundTime;
 
         timeDifficulty = Mathf.Clamp01(1f - (timeLeft / GameController.MaxRoundTime));
-        levelDifficulty = 1f + (playerLevel * 0.15f);
-        killDifficulty = Mathf.Clamp(GameController.Instance.killedEnemies * 0.01f, 0f, 3f);
+        levelDifficulty = 1f + (playerLevel * levelFactor);
+        killDifficulty = Mathf.Clamp(GameController.Instance.killedEnemies * killsFactor, 0f, killsDifficultyMax);
     }
 
     private void OnEnemyDeath(EnemyBehaviour behaviour, DamageSource source)
     {
         spawnedEnemies.Remove(behaviour.gameObject);
+    }
+
+    private void OnGameWon()
+    {
+        StopSpawnLoop();
+        foreach (GameObject zombie in spawnedEnemies)
+        {
+            zombie.GetComponent<HealthSystem>().Kill(DamageSource.VOID);
+        }
+    }
+    private void OnGameLost()
+    {
+        StopSpawnLoop();
     }
 
     // ----- Boss Spawn -----

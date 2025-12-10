@@ -196,7 +196,7 @@ public class DevTools : MonoBehaviour
         {
             DeactivateDevMod();
             Debug.Log("Game Restarting.");
-            GameController.Instance.RestartGame();
+            GameController.Instance.RestartGame(false);
         }
     }
     public void EasterEgg(InputAction.CallbackContext context)

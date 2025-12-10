@@ -36,7 +36,7 @@ public class OrbitalKnifeBehaviour : MonoBehaviour
     {
         damage = ownerAttributes.attackDamage.FinalValue * ownerAttributes.criticalMultiplier.FinalValue;
         StartCoroutine(BlinkRed());
-        SFXManager.Instance.PlaySFX(SFXManager.Instance.SFXLibrary.GetSFXByName("Pluh"));
+        //SFXManager.Instance.PlaySFX(SFXManager.Instance.SFXLibrary.GetSFXByName("Pluh"));
     }
 
     IEnumerator BlinkRed()

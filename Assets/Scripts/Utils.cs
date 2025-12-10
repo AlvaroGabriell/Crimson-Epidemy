@@ -32,18 +32,21 @@ public class Utils
     public static bool TryGetGroupByName(string name, out GameObject group)
     {
         group = null;
-        foreach (var g in groups)
+
+        for(int i = groups.Count - 1; i >= 0; i--)
         {
-            if(g.name == name)
+            var g = groups[i];
+
+            if (g.IsUnityNull())
             {
-                if (g.IsUnityNull())
-                {
-                    groups.Remove(g);
-                } else
-                {
-                    group = g;
-                    return true;
-                }
+                groups.RemoveAt(i);
+                continue;
+            }
+
+            if (g.name.Equals(name))
+            {
+                group = g;
+                return true;
             }
         }
 
