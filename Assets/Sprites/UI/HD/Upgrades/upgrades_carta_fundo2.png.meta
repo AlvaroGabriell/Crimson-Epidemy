@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 548b25a126a67b94ab9aab55c83f67ab
+guid: 0e1d7a98f319a4a46ab8feed1d7aed01
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 196111644940999225
-    second: upgrades_carta_fundo_0
+      213: -1876439161614213382
+    second: upgrades_carta_fundo2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: upgrades_carta_fundo_0
+      name: upgrades_carta_fundo2_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 23
-        width: 471
-        height: 700
+        x: 49
+        y: 32
+        width: 603
+        height: 803
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 93a9605808ab8b200800000000000000
-      internalID: 196111644940999225
+      spriteID: afe5a59368c85f5e0800000000000000
+      internalID: -1876439161614213382
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      upgrades_carta_fundo_0: 196111644940999225
+      upgrades_carta_fundo2_0: -1876439161614213382
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
