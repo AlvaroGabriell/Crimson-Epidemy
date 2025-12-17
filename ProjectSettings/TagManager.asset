@@ -50,9 +50,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: LivingBeing
-    uniqueID: 4222499637
-    locked: 0
   - name: Projectile
     uniqueID: 3791300945
     locked: 0
