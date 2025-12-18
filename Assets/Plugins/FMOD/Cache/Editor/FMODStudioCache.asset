@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Musics.bank
   Name: Musics
   StudioPath: bank:/Musics
-  lastModified: 639003495499769599
+  lastModified: 639007117748226647
   FileSizes: []
   Exists: 1
 --- !u!114 &-8255376876311168985
@@ -138,7 +138,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/SFXs.bank
   Name: SFXs
   StudioPath: bank:/SFXs
-  lastModified: 639003495499865148
+  lastModified: 639007117748226647
   FileSizes: []
   Exists: 1
 --- !u!114 &-2763423614614083899
@@ -201,7 +201,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6865102756231845519}
   cacheVersion: 131857
-  cacheTime: 639003495499865148
+  cacheTime: 639007117748226647
   SerializableEventsDict:
   - key: event:/Crimson epidemy FMOD/musics/msc_ce_gameplay
     index: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639003495499500681
+  lastModified: 639007117748070425
   FileSizes: []
   Exists: 1
 --- !u!114 &6865102756231845519
@@ -390,7 +390,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639003495499586729
+  lastModified: 639007117748070425
   FileSizes:
   - Name: 
     Value: 1582
