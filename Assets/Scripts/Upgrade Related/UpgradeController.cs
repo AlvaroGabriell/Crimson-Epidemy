@@ -56,7 +56,7 @@ public class UpgradeController : MonoBehaviour
     public void OpenUpgradeScreen(int CurrentLevel)
     {
         player.GetComponent<HealthSystem>().HealFullHealth();
-        GameController.Instance.PauseGame();
+        GameController.Instance.PauseGame(false);
         UpgradeScreen.SetActive(true);
 
         for(int i = 0; i < 3; i++)
@@ -77,7 +77,7 @@ public class UpgradeController : MonoBehaviour
     {
         player.GetComponent<HealthSystem>().SetMaxHealthAndFullHeal(playerAttributes.maxHealth.FinalValue); // Guarantee
         UpgradeScreen.SetActive(false);
-        GameController.Instance.ResumeGame();
+        GameController.Instance.ResumeGame(false);
 
         foreach (GameObject card in currentCards) Destroy(card);
         currentCards.Clear();

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -17,8 +18,8 @@ public class GameController : MonoBehaviour
     public bool IsTimerRunning { get; private set; } = false;
 
     public static event Action OnGameStarted;
-    public static event Action OnGameWon;
-    public static event Action OnGameLost;
+    public static event Action OnGameWon, OnGameLost;
+    public static event Action<bool> OnGamePaused, OnGameResumed;
     //public static event Action OnTimerFinished;
 
 
@@ -97,18 +98,20 @@ public class GameController : MonoBehaviour
         MusicManager.Instance.PlayMusic(MusicManager.Instance.musicLibrary.GetMusicByName("msc_ce_gameplay"));
     }
 
-    public void PauseGame()
+    public void PauseGame(bool PlayerPaused)
     {
         Time.timeScale = 0f;
         isPaused = true;
         PauseTimer();
+        OnGamePaused?.Invoke(PlayerPaused);
     }
 
-    public void ResumeGame()
+    public void ResumeGame(bool PlayerResumed)
     {
         Time.timeScale = 1f;
         isPaused = false;
         ResumeTimer();
+        OnGameResumed?.Invoke(PlayerResumed);
     }
 
     public void LoseGame()
@@ -120,7 +123,7 @@ public class GameController : MonoBehaviour
 
     public void RestartGame(bool toMainMenu)
     {
-        if(isPaused) ResumeGame();
+        if(isPaused) ResumeGame(true);
         gameStarted = false; IsTimerRunning = false; gameFinished = false;
         enemyCount = 0; killedEnemies = 0;
         PauseTimer();
@@ -182,7 +185,7 @@ public class GameController : MonoBehaviour
     {
         gameFinished = true;
         PauseTimer();
-        PauseGame();
+        PauseGame(false);
         RoundTime = 0f;
         //OnTimerFinished?.Invoke();
         OnGameWon?.Invoke();

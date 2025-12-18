@@ -2,18 +2,22 @@ using UnityEngine;
 
 public class UIHelper : MonoBehaviour
 {
-    [SerializeField] private GameObject GameWinScreen, GameLostScreen;
+    [SerializeField] private GameObject GameWinScreen, GameLostScreen, PauseScreen;
 
     void Awake()
     {
         GameController.OnGameWon += OnGameWon;
         GameController.OnGameLost += OnGameLost;
+        GameController.OnGamePaused += ShowPauseMenu;
+        GameController.OnGameResumed += HidePauseMenu;
     }
 
     void OnDestroy()
     {
         GameController.OnGameWon -= OnGameWon;
         GameController.OnGameLost -= OnGameLost;
+        GameController.OnGamePaused -= ShowPauseMenu;
+        GameController.OnGameResumed -= ShowPauseMenu;
     }
 
 
@@ -34,5 +38,14 @@ public class UIHelper : MonoBehaviour
     private void OnGameLost()
     {
         GameLostScreen.SetActive(true);
+    }
+
+    public void ShowPauseMenu(bool PlayerPaused)
+    {
+        if(PlayerPaused) PauseScreen.SetActive(true);
+    }
+    public void HidePauseMenu(bool PlayerResumed)
+    {
+        if(PlayerResumed) PauseScreen.SetActive(false);
     }
 }

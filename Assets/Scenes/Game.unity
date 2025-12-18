@@ -234,30 +234,32 @@ Tilemap:
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: -1.1185541e+29
+      e00: 4.6343714e-17
       e01: 0
-      e02: -1.11856315e+29
-      e03: 8.7622175e+19
-      e10: 5.7e-44
+      e02: 4.6343608e-17
+      e03: 1.3959018e-38
+      e10: 8e-44
       e11: 0
-      e12: 5.7e-44
-      e13: 6.33e-43
-      e20: 5.24288e+11
+      e12: 8e-44
+      e13: 6.4e-43
+      e20: -2.6739205e-33
       e21: 0
-      e22: 2.3701988e+29
-      e23: -1.4326446e-18
-      e30: 4.5912e-41
+      e22: -9.874424e+9
+      e23: -3.3470147e-19
+      e30: 4.5911e-41
       e31: 0
-      e32: 6.38e-43
-      e33: 6.33e-43
+      e32: 6.43e-43
+      e33: 6.4e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: 1e-45, g: 1e-45, b: 1e-45, a: 1e-45}
-  m_TileObjectToInstantiateArray: []
+    m_Data: {r: 6.7174183e-12, g: 6.7174183e-12, b: 6.7174183e-12, a: 6.7174183e-12}
+  m_TileObjectToInstantiateArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -11, y: -5, z: 0}
-  m_Size: {x: 11, y: 8, z: 1}
+  m_Origin: {x: -19, y: -6, z: 0}
+  m_Size: {x: 19, y: 9, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -37317,7 +37319,19 @@ MonoBehaviour:
     m_ActionId: d774ab54-9e99-4c6e-935e-186f2c0b420c
     m_ActionName: 'DevMode/LogAttributes[/Keyboard/l]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 848951817}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnEscape
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 81c59d19-e839-4554-b09a-1e2e4b247ea2
     m_ActionName: 'Player/PauseMenu[/Keyboard/escape]'
   - m_PersistentCalls:
@@ -39171,7 +39185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeLibrary
   upgradesData:
-  - upgradeImage: {fileID: 21300000, guid: 86181ea363bedbc47927106443bd284b, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: d02f776d0ea33f743abd19c2a2237088, type: 3}
     upgradeName: Tanque
     upgradeDescription: '+20% de vida max.
 
@@ -39190,7 +39204,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 86181ea363bedbc47927106443bd284b, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: 8763b36d6f3fc144397ac99d8449a9b3, type: 3}
     upgradeName: "M\xE3os R\xE1pidas"
     upgradeDescription: '+20% de vel. de ataque
 
@@ -39207,7 +39221,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 86181ea363bedbc47927106443bd284b, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: edaf85de9434f4843ac2a62a1fe4f2b2, type: 3}
     upgradeName: Preciso
     upgradeDescription: "+10% taxa de cr\xEDtico\n-10% vel. de ataque"
     weight: 35
@@ -39222,7 +39236,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 86181ea363bedbc47927106443bd284b, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: ee2c1c409a9abed4bae72fbf96042e32, type: 3}
     upgradeName: Esguio
     upgradeDescription: '+20% vel. de movimento
 
@@ -39239,7 +39253,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 168bce32f3b80ed448cf4c224c4cbf80, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: f0c84febb65b96645abd6ca2af61a359, type: 3}
     upgradeName: Aumento de Atributo
     upgradeDescription: '+10 no valor base da
 
@@ -39257,7 +39271,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 168bce32f3b80ed448cf4c224c4cbf80, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: f0c84febb65b96645abd6ca2af61a359, type: 3}
     upgradeName: Aumento de Atributo
     upgradeDescription: '+0.5 no valor base da
 
@@ -39275,7 +39289,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 168bce32f3b80ed448cf4c224c4cbf80, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: f0c84febb65b96645abd6ca2af61a359, type: 3}
     upgradeName: Aumento de Atributo
     upgradeDescription: '+2 no valor base do
 
@@ -39293,7 +39307,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 168bce32f3b80ed448cf4c224c4cbf80, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: f0c84febb65b96645abd6ca2af61a359, type: 3}
     upgradeName: Aumento de Atributo
     upgradeDescription: '+2 no valor base da
 
@@ -39311,7 +39325,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 168bce32f3b80ed448cf4c224c4cbf80, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: f0c84febb65b96645abd6ca2af61a359, type: 3}
     upgradeName: Aumento de Atributo
     upgradeDescription: '+1 no valor base da
 
@@ -39329,7 +39343,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 1
-  - upgradeImage: {fileID: 21300000, guid: 168bce32f3b80ed448cf4c224c4cbf80, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: f0c84febb65b96645abd6ca2af61a359, type: 3}
     upgradeName: Aumento de Atributo
     upgradeDescription: "+1 no valor base da\nTaxa de Cr\xEDtico\n\n(X = ValorBase
       * PercentModifier)"
@@ -39342,7 +39356,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 168bce32f3b80ed448cf4c224c4cbf80, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: f0c84febb65b96645abd6ca2af61a359, type: 3}
     upgradeName: Aumento de Atributo
     upgradeDescription: '+1 no valor base do
 
@@ -39360,7 +39374,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 168bce32f3b80ed448cf4c224c4cbf80, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: f0c84febb65b96645abd6ca2af61a359, type: 3}
     upgradeName: Aumento de Atributo
     upgradeDescription: "+1.5 no valor base da\n\xC1rea de Coleta\n\n(X = ValorBase
       * PercentModifier)"
@@ -39373,7 +39387,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 0
-  - upgradeImage: {fileID: 21300000, guid: 168bce32f3b80ed448cf4c224c4cbf80, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: f0c84febb65b96645abd6ca2af61a359, type: 3}
     upgradeName: Aumento de Atributo
     upgradeDescription: '+0.8 no valor base da
 
@@ -39391,7 +39405,7 @@ MonoBehaviour:
     weaponUpgrade:
       weaponType: 0
       amount: 1
-  - upgradeImage: {fileID: 21300000, guid: b9b518b425a60c446807adc8a5ea9917, type: 3}
+  - upgradeImage: {fileID: 21300000, guid: 5de6bfc545937454381d864f9086882e, type: 3}
     upgradeName: Faca Orbital
     upgradeDescription: +1 faca que rodeia o personagem, ferindo os zumbis que encosta
     weight: 100

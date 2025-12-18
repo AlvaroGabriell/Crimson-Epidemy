@@ -144,6 +144,18 @@ public class PlayerController : MonoBehaviour
         verticalMovement = context.ReadValue<Vector2>().y;
     }
 
+    public void OnEscape(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(GameController.Instance.gameStarted || !GameController.Instance.gameFinished)
+            {
+                if(!GameController.Instance.isPaused) GameController.Instance.PauseGame(true);
+                else if(GameController.Instance.isPaused) GameController.Instance.ResumeGame(true);
+            }
+        }
+    }
+
     public void PlaySFX(string sfxName)
     {
         SFXManager.Instance.PlaySFX(SFXManager.Instance.SFXLibrary.GetSFXByName(sfxName));
